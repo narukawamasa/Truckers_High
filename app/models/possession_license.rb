@@ -1,0 +1,2 @@
+class PossessionLicense < ApplicationRecord
+end
