@@ -21,6 +21,15 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
+              <% if transport_company_signed_in? %>
+              <li>
+                <%= link_to "ログアウト", destroy_transport_company_session_path, method: :delete %>
+              </li>
+              <% elsif driver_signed_in? %>
+              <li>
+                <%= link_to "ログアウト", destroy_driver_session_path, method: :delete %>
+              </li>
+              <% end %>
             </ul>
           </div>
         </div>

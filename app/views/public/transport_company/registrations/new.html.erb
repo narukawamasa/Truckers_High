@@ -1,29 +1,56 @@
-<h2>Sign up</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div><%#= flash[:notice] %></div>
+    <div class="ml-3 mb-5">
+      <h5 style="background-color:#f4f4f4">　運送会社新規登録　</h5>
+    </div>
+  </div>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "publics/transport_companies/shared/error_messages", resource: resource %>
+  <%= render "public/transport_company/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"会社名" %></div>
+    <div><%= f.text_field :name, autofocus: true, placeholder:"株式会社〇〇" %></div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"郵便番号(ハイフンなし)" %></div>
+    <div>　　<%= f.text_field :postal_code, autofocus: true, placeholder:"0000000" %></div>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :住所 %></div>
+    <div>　　<%= f.text_field :address, autofocus: true, size:60 %></div>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"電話番号(ハイフンなし)" %></div>
+    <div>　　<%= f.text_field :phone_number, autofocus: true, placeholder:"00000000000" %></div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"メールアドレス" %></div>
+    <div>　　<%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"Wild@Bravo.com" %></div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"パスワード(6文字以上)" %></div>
+    <div>　　<%= f.password_field :password, autocomplete: "new-password" %></div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-3 mr-2"><%= f.label :"パスワード(確認用)" %></div>
+    <div>　　<%= f.password_field :password, autocomplete: "new-password" %></div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 mr-5"></div>
+    <div class=""><%= f.submit "新規登録", class: "px-5 btn btn-success mb-3" %></div>
   </div>
 <% end %>
 
 <%= render "public/transport_company/shared/links" %>
+
+</div>

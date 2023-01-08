@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h1>ようこそ！</h1>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <h4>運送会社の方はこちら</h4>
+      <p><%= link_to "ログイン", new_transport_company_session_path %> </p>
+      <p>まだ登録されてない運送会社の方はこちら</p>
+      <p><%= link_to "新規登録", new_transport_company_registration_path %></p>
+    </div>
+    <div class="col-6">
+      <h4>運転手の方はこちら</h4>
+      <p><%= link_to "ログイン", new_driver_session_path %></p>
+      <p>まだ登録されてない運転手の方はこちら</p>
+      <p><%= link_to "新規登録", new_driver_registration_path %></p>
+    </div>
+  </div>
+</div>
