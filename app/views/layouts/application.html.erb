@@ -23,9 +23,15 @@
             <ul class="navbar-nav ml-auto">
               <% if transport_company_signed_in? %>
               <li>
+                <%= link_to "所属運転手一覧", drivers_path %>
+              </li>
+              <li>
                 <%= link_to "ログアウト", destroy_transport_company_session_path, method: :delete %>
               </li>
               <% elsif driver_signed_in? %>
+              <li>
+                <%= link_to "運送会社一覧", transport_companies_path %>
+              </li>
               <li>
                 <%= link_to "ログアウト", destroy_driver_session_path, method: :delete %>
               </li>

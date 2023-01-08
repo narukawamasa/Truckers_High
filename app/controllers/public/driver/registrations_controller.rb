@@ -62,7 +62,7 @@ class Public::Driver::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    drivers_path(current_driver)
+    drivers_my_page_path(current_driver)
   end
 
   protected

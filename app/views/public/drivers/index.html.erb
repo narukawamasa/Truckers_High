@@ -1,0 +1,23 @@
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">名前</th>
+      <th scope="col">電話番号</th>
+      <th scope="col">DMルーム</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drivers.each do |driver| %>
+    <tr>
+      <th scope="row"><%= @number %></th>
+      <td><%= driver.name %></td>
+      <td><%= driver.phone_number %></td>
+      <td>ルームへ</td>
+    </tr>
+    <% @number += 1 %>
+    <% end %>
+  </tbody>
+</table>
+</div>

@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    get 'drivers/my_page/:id' => 'drivers#show', as: 'drivers'
-    get 'transport_companies/my_page/:id' => 'transport_companies#show', as: 'transport_companies'
+    get 'drivers/my_page/:id' => 'drivers#show', as: 'drivers_my_page'
+    get 'transport_companies/my_page/:id' => 'transport_companies#show', as: 'transport_companies_my_page'
+    resources :drivers, only: [:index]
     resources :transport_companies, only: [:index]
     resources :licenses, only: [:index, :create]
     resources :possession_licenses, only: [:create, :destroy]

@@ -1,0 +1,29 @@
+<div class="container">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">名前</th>
+      <th scope="col">郵便番号</th>
+      <th scope="col">住所</th>
+      <th scope="col">電話番号</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transport_companies.each do |transport_company| %>
+    <tr>
+      <th scope="row"><%= @number %></th>
+      <td>
+        <%= link_to transport_companies_my_page_path(transport_company) do %>
+          <%= transport_company.name %>
+        <% end %>
+      </td>
+      <td><%= transport_company.postal_code %></td>
+      <td><%= transport_company.address %></td>
+      <td><%= transport_company.phone_number %></td>
+    </tr>
+    <% @number += 1 %>
+    <% end %>
+  </tbody>
+</table>
+</div>

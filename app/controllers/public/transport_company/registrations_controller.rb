@@ -63,7 +63,7 @@ class Public::TransportCompany::RegistrationsController < Devise::RegistrationsC
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    transport_companies_path(current_transport_company)
+    transport_companies_my_page_path(current_transport_company)
   end
 
   protected
