@@ -3,4 +3,11 @@ class Driver < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+
+
+  def name
+    family_name + first_name
+  end
+
 end
