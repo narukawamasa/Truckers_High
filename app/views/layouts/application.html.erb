@@ -10,7 +10,35 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+          <a class="navbar-brand p-3" href="/"><%= image_tag('logo.png') %></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
+     <footer class="fixed-bottom bg-dark text-white pt-5 pb-4">
+      <div class="container">
+        <div class="row no-gutters">
+          <div class="col-md-4 p-3">
+            <%= image_tag('logo_footer.png') %>
+          </div>
+          <div class="col-md-8">
+            <ul class="p-0 list-unstyled">
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
