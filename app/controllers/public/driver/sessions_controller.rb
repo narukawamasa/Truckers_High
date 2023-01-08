@@ -26,7 +26,7 @@ class Public::Driver::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    drivers_my_page_path(current_driver)
+    driver_path(current_driver)
   end
 
 end

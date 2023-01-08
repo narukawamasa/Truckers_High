@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #devise_for :transport_companies
   #devise_for :admins
 
-  devise_for :driver, skip: [:passwords], controllers: {
+  devise_for :drivers, skip: [:passwords], controllers: {
   registrations: "public/driver/registrations",
   sessions: 'public/driver/sessions'
   }
@@ -20,10 +20,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    get 'drivers/my_page/:id' => 'drivers#show', as: 'drivers_my_page'
-    get 'transport_companies/my_page/:id' => 'transport_companies#show', as: 'transport_companies_my_page'
-    resources :drivers, only: [:index]
-    resources :transport_companies, only: [:index]
+    resources :drivers, only: [:index, :show, :update]
+    resources :transport_companies, only: [:index, :show]
     resources :licenses, only: [:index, :create]
     resources :possession_licenses, only: [:create, :destroy]
     resources :companies, only: [:new, :create, :index, :show, :edit, :update]

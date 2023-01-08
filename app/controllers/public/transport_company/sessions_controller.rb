@@ -26,7 +26,7 @@ class Public::TransportCompany::SessionsController < Devise::SessionsController
   # end
 
   def after_sign_in_path_for(resource)
-    transport_companies_my_page_path(current_transport_company)
+    transport_company_path(current_transport_company)
   end
 
 end

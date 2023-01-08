@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <%= image_tag @transport_company.get_profile_image(200,200) %>
+    </div>
+    <div class="col-7">
+      <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">会社名</th>
+      <td><%= @transport_company.name %></td>
+    </tr>
+    <tr>
+      <th scope="row">住所</th>
+      <td><%= @transport_company.address_display %></td>
+    </tr>
+    <tr>
+      <th scope="row">電話番号</th>
+      <td><%= @transport_company.phone_number %></td>
+    </tr>
+    <tr>
+      <th scope="row">会社紹介</th>
+      <td><%= @transport_company.introduction %></td>
+    </tr>
+    <tr>
+      <% if current_driver.transport_company_id == nil %>
+      <td>
+        <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+          <%= f.hidden_field :transport_company_id, :value => @transport_company.id %>
+          <%= f.submit '所属する', class:"btn btn-success" %>
+        <% end %>
+      </td>
+      <% elsif current_driver.transport_company_id == @transport_company.id %>
+      <td>
+        <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+          
+          <%= f.submit '所属から外れる', class:"btn btn-success" %>
+        <% end %>
+      </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+    </div>
+  </div>
+</div>

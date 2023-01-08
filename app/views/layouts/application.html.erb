@@ -30,6 +30,9 @@
               </li>
               <% elsif driver_signed_in? %>
               <li>
+                <%= link_to "マイページ", driver_path(current_driver) %>
+              </li>
+              <li>
                 <%= link_to "運送会社一覧", transport_companies_path %>
               </li>
               <li>

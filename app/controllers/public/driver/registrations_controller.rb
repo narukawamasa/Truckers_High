@@ -62,13 +62,15 @@ class Public::Driver::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def after_sign_in_path_for(resource)
-    drivers_my_page_path(current_driver)
+    driver_path(current_driver)
   end
 
   protected
+  
+
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :family_name, :first_name, :family_name_kana, :first_name_kana, :phone_number])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :family_name, :first_name, :family_name_kana, :first_name_kana, :phone_number, :transport_company_id])
   end
 
 end
