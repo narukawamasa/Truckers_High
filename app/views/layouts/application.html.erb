@@ -23,6 +23,9 @@
             <ul class="navbar-nav ml-auto">
               <% if transport_company_signed_in? %>
               <li>
+                <%= link_to "マイページ", transport_company_path(current_transport_company) %>
+              </li>
+              <li>
                 <%= link_to "所属運転手一覧", drivers_path %>
               </li>
               <li>

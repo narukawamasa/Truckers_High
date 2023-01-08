@@ -29,20 +29,22 @@
       <td><%= @transport_company.introduction %></td>
     </tr>
     <tr>
-      <% if current_driver.transport_company_id == nil %>
-      <td>
-        <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
-          <%= f.hidden_field :transport_company_id, :value => @transport_company.id %>
-          <%= f.submit '所属する', class:"btn btn-success" %>
+      <% if driver_signed_in? %>
+        <% if current_driver.transport_company_id == nil %>
+        <td>
+          <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+            <%= f.hidden_field :transport_company_id, :value => @transport_company.id %>
+            <%= f.submit '所属する', class:"btn btn-success" %>
+          <% end %>
+        </td>
+        <% elsif current_driver.transport_company_id == @transport_company.id %>
+        <td>
+          <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+            <%= f.submit '所属から外れる', class:"btn btn-success" %>
+          <% end %>
+        </td>
         <% end %>
-      </td>
-      <% elsif current_driver.transport_company_id == @transport_company.id %>
-      <td>
-        <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
-          
-          <%= f.submit '所属から外れる', class:"btn btn-success" %>
-        <% end %>
-      </td>
+      <% elsif transport_company_signed_in? %>
       <% end %>
     </tr>
   </tbody>
