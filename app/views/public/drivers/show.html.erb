@@ -14,4 +14,49 @@
       </h3>
     </div>
   </div>
+  <div class="row">
+    <div class="col-5">
+      <%= image_tag @driver.get_profile_image(200,200) %>
+    </div>
+    <div class="col-7">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">名前</th>
+            <td><%= @driver.name %></td>
+          </tr>
+          <% if transport_company_signed_in? && @driver.transport_company_id == current_transport_company.id || driver_signed_in? && @driver.id == current_driver.id %>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @driver.phone_number %></td>
+          </tr>
+          <% end %>
+          <tr>
+            <th scope="row">自己紹介文</th>
+            <td><%= @driver.introduction %></td>
+          </tr>
+          <tr>
+            <th scope="row">所持免許</th>
+            <td>
+            <% if @driver.possession_licenses.exists? %>
+              <% @driver.possession_licenses.each do |possession_license| %>
+                <%= possession_license.license.name %>
+              <% end %>
+            <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "免許一覧へ", licenses_path %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "情報編集", edit_driver_path(@driver.id) %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

@@ -12,4 +12,20 @@ class Public::TransportCompaniesController < ApplicationController
     @number = 1
   end
 
+  def edit
+    @transport_company = TransportCompany.find(params[:id])
+  end
+
+  def update
+    @transport_company = TransportCompany.find(params[:id])
+    @transport_company.update(transport_company_params)
+    redirect_to transport_company_path(@transport_company.id)
+  end
+
+  private
+
+  def transport_company_params
+    params.require(:transport_company).permit(:name, :postal_code, :address, :introduction, :phone_number, :email, :profile_image)
+  end
+
 end

@@ -5,50 +5,57 @@
     </div>
     <div class="col-7">
       <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">会社名</th>
-      <td><%= @transport_company.name %></td>
-    </tr>
-    <tr>
-      <th scope="row">住所</th>
-      <td><%= @transport_company.address_display %></td>
-    </tr>
-    <tr>
-      <th scope="row">電話番号</th>
-      <td><%= @transport_company.phone_number %></td>
-    </tr>
-    <tr>
-      <th scope="row">会社紹介</th>
-      <td><%= @transport_company.introduction %></td>
-    </tr>
-    <tr>
-      <% if driver_signed_in? %>
-        <% if current_driver.transport_company_id == nil %>
-        <td>
-          <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
-            <%= f.hidden_field :transport_company_id, :value => @transport_company.id %>
-            <%= f.submit '所属する', class:"btn btn-success" %>
-          <% end %>
-        </td>
-        <% elsif current_driver.transport_company_id == @transport_company.id %>
-        <td>
-          <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
-            <%= f.submit '所属から外れる', class:"btn btn-success" %>
-          <% end %>
-        </td>
-        <% end %>
-      <% elsif transport_company_signed_in? %>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">会社名</th>
+            <td><%= @transport_company.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">住所</th>
+            <td><%= @transport_company.address_display %></td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @transport_company.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">会社紹介</th>
+            <td><%= @transport_company.introduction %></td>
+          </tr>
+          <tr>
+            <% if driver_signed_in? %>
+              <% if current_driver.transport_company_id == nil %>
+              <td>
+                <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+                  <%= f.hidden_field :transport_company_id, :value => @transport_company.id %>
+                  <%= f.submit '所属する', class:"btn btn-success" %>
+                <% end %>
+              </td>
+              <% elsif current_driver.transport_company_id == @transport_company.id %>
+              <td>
+                <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+                  <%= f.submit '所属から外れる', class:"btn btn-success" %>
+                <% end %>
+              </td>
+              <% else %>
+              <td>
+                <%= current_driver.transport_company.name %>に所属しています
+              </td>
+              <% end %>
+            <% elsif transport_company_signed_in? %>
+              <td>
+                <%= link_to "情報編集へ", edit_transport_company_path(@transport_company.id) %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

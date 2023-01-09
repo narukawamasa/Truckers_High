@@ -19,7 +19,7 @@
         <tr>
           <td><%= license.name %></td>
           <td>
-            <% if license.possession_licenses.exists? %>
+            <% if license.possession_licenses.exists? && license.possession_licenses.exists?(driver_id: current_driver.id) %>
               <%= link_to "外す", possession_license_path(license.id), method: :delete %>
             <% else %>
               <%= form_with model: @possession_license, url: possession_licenses_path, method: :post do |f| %>
