@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <%= link_to "レビューを書く", new_company_review_path %>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">目的</th>
+      <th scope="col">投稿日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= @reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= link_to company_review_path(review) do %>
+            <%= review.objective_i18n %>
+          <% end %>
+        </td>
+        <td><%= review.created_at.strftime('%Y/%m/%d') %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

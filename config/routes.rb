@@ -25,7 +25,9 @@ Rails.application.routes.draw do
     resources :transport_companies, only: [:index, :show, :edit, :update]
     resources :licenses, only: [:index, :create]
     resources :possession_licenses, only: [:create, :destroy]
-    resources :companies, only: [:new, :create, :index, :show, :edit, :update]
+    resources :companies, only: [:new, :create, :index, :show, :edit, :update] do
+      resources :reviews, only: [:new, :create, :index, :show, :edit, :update]
+    end
     resources :bookmarks, only: [:index, :create, :destroy]
   end
 

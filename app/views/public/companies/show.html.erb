@@ -38,6 +38,14 @@
               <% end %>
             </td>
           </tr>
+          <tr>
+            <td>
+              <%= link_to company_reviews_path(@company) do %>
+                レビュー数:<%= @company.reviews.count %>
+              <% end %>
+            </td>
+            <td><%= link_to "レビューを書く", new_company_review_path(@company) %></td>
+          </tr>
         </tbody>
       </table>
     </div>

@@ -13,7 +13,6 @@ class Public::CompaniesController < ApplicationController
   def index
     @companies = Company.all
     @bookmark = Bookmark.new
-    #@bookmarks = Bookmark.find_by(driver_id: current_driver.id, company_id: @companies.id)
   end
 
   def show
