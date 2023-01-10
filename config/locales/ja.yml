@@ -1,0 +1,7 @@
+ ja:
+  enums:
+    review:
+      objective:
+        wholesale: "卸し"
+        loading: "積み"
+        other: "その他"

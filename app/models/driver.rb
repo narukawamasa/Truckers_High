@@ -9,6 +9,7 @@ class Driver < ApplicationRecord
   # optional: true でnilを許容し、バリデーションに引っかからないようにする
   has_many :possession_licenses, dependent: :destroy
   has_many :bookmarks, dependent: :destroy
+  has_many :reviews
 
   def get_profile_image(width, height)
   unless profile_image.attached?
