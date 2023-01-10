@@ -1,0 +1,100 @@
+<%= form_with model: [@company, @review] do |f| %>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-1">
+      <div></div>
+    </div>
+    <div>
+      <h5 style="background-color:#f4f4f4">　レビュー編集　</h5>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :目的 %></div>
+    </div>
+    <div class="col-4">
+      <div>
+        <%= f.radio_button :objective, Review.objectives.key(0), autofocus: true %>
+        <%= f.label :objective_wholesale, Review.objectives_i18n[:wholesale] %>
+        <%= f.radio_button :objective, Review.objectives.key(1), autofocus: true %>
+        <%= f.label :objective_loading, Review.objectives_i18n[:loading] %>
+        <%= f.radio_button :objective, Review.objectives.key(2), autofocus: true %>
+        <%= f.label :objective_other, Review.objectives_i18n[:other] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :積み、荷下ろし方法　＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_area :method, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :荷物詳細＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_field :baggage, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :あなたの車両＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_field :vehicle, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :受付時間、場所＃必須 %></div>
+    </div>
+    <div class="col-10">
+      <div><%= f.text_field :reception_time, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :並び方＃必須 %></div>
+    </div>
+    <div class="col-10">
+      <div><%= f.text_field :order, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :待機場所＃必須 %></div>
+    </div>
+    <div class="col-10">
+      <div><%= f.text_field :waiting_place, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :その他共有事項 %></div>
+    </div>
+    <div class="col-10">
+      <div><%= f.text_field :other, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-2">
+      <div></div>
+    </div>
+    <div class="col-4">
+      <div><%= f.submit "編集する", class: 'px-5 btn btn-success' %></div>
+    </div>
+  </div>
+</div>
+<%end%>

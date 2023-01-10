@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "レビュー一覧へ", company_reviews_path(params[:company_id]) %>
+    </div>
+    <div class="col-2">
+      <% if @review.driver_id == current_driver.id %>
+        <%= link_to "編集する", edit_company_review_path(@review) %>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-7">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">目的</th>
+            <td><%= @review.objective_i18n %></td>
+          </tr>
+          <tr>
+            <th scope="row">方法</th>
+            <td><%= @review.method %></td>
+          </tr>
+          <tr>
+            <th scope="row">荷物</th>
+            <td><%= @review.baggage %></td>
+          </tr>
+          <tr>
+            <th scope="row">車両</th>
+            <td><%= @review.vehicle %></td>
+          </tr>
+          <tr>
+            <th scope="row">受付時間</th>
+            <td><%= @review.reception_time %></td>
+          </tr>
+          <tr>
+            <th scope="row">並び方</th>
+            <td><%= @review.order %></td>
+          </tr>
+          <tr>
+            <th scope="row">待機場所</th>
+            <td><%= @review.waiting_place %></td>
+          </tr>
+          <tr>
+            <th scope="row">その他共有事項</th>
+            <td><%= @review.other %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

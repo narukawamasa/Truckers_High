@@ -49,6 +49,11 @@
             <td>
               <%= link_to "免許一覧へ", licenses_path %>
             </td>
+            <td>
+              <%= link_to bookmarks_path do %>
+                ブックマーク：<%= @driver.bookmarks.count %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <td>

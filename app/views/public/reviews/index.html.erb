@@ -1,6 +1,11 @@
 <div class="container">
   <div class="row">
+    <div class="col-6">
     <%= link_to "レビューを書く", new_company_review_path %>
+    </div>
+    <div class="col-6">
+      <%= link_to "会社ページへ戻る", company_path(params[:company_id]) %>
+    </div>
   </div>
 <table class="table">
   <thead>

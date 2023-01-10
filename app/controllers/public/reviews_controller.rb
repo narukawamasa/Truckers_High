@@ -14,6 +14,7 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
+    @review = Review.find(params[:id])
   end
 
   def index
@@ -22,9 +23,15 @@ class Public::ReviewsController < ApplicationController
   end
 
   def edit
+    @review = Review.find(params[:id])
+    @company = Company.find(params[:company_id])
   end
 
   def update
+    @company = Company.find(params[:company_id])
+    @review = Review.find(params[:id])
+    @review.update(review_params)
+    redirect_to company_review_path(@company.id, @review.id)
   end
 
   def review_params
