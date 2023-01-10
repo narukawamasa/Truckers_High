@@ -8,7 +8,7 @@ class Public::ReviewsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @review = current_driver.reviews.new(review_params)
-    #@review.company_id = @company.id
+    @review.company_id = @company.id
     @review.save
     redirect_to company_reviews_path
   end

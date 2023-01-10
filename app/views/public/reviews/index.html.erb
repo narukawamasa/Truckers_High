@@ -10,10 +10,10 @@
     </tr>
   </thead>
   <tbody>
-    <%= @reviews.each do |review| %>
+    <% @reviews.each do |review| %>
       <tr>
         <td>
-          <%= link_to company_review_path(review) do %>
+          <%= link_to company_review_path(company_id: review.company.id, id: review.id) do %>
             <%= review.objective_i18n %>
           <% end %>
         </td>
