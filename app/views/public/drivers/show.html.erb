@@ -60,6 +60,14 @@
               <%= link_to "情報編集", edit_driver_path(@driver.id) %>
             </td>
           </tr>
+          <% if @driver.rooms.exists? %>
+          <tr>
+            <td>
+              <% room = Room.find_by(driver_id: @driver.id, transport_company_id: @driver.transport_company.id) %>
+              <%= link_to "所属会社とのDMルームへ", room_path(room.id) %>
+            </td>
+          </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

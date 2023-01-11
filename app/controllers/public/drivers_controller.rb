@@ -17,10 +17,18 @@ class Public::DriversController < ApplicationController
     @driver = Driver.find(current_driver.id)
     if @driver.transport_company_id == nil
       @driver.update(driver_params)
+      if @driver.rooms.exists?
+        redirect_to request.referer
+      else
+        @room = Room.new
+        @room = Room.create!({driver_id: current_driver.id, transport_company_id: @driver.transport_company_id})
+        #redirect_to controller: :rooms, action: :create
+        redirect_to room_path(@room.id)
+      end
     else
       @driver.update(transport_company_id: nil)
+      redirect_to request.referer
     end
-    redirect_to request.referer
   end
 
   def update_all
