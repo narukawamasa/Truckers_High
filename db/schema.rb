@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_10_094224) do
+ActiveRecord::Schema.define(version: 2023_01_11_025829) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -121,6 +121,13 @@ ActiveRecord::Schema.define(version: 2023_01_10_094224) do
     t.string "waiting_place", null: false
     t.text "other"
     t.boolean "deletion", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.integer "driver_id", null: false
+    t.integer "transport_company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

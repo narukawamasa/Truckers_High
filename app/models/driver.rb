@@ -11,6 +11,7 @@ class Driver < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :reviews
   has_many :review_comments
+  has_many :rooms
 
   def get_profile_image(width, height)
   unless profile_image.attached?
