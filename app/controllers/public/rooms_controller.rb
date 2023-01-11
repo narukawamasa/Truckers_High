@@ -1,16 +1,15 @@
 class Public::RoomsController < ApplicationController
 
   def create
-    @room = current_driver.rooms.new(room_params)
-    @room.transport_company_id = current_driver.transport_companies.id
-    @room.save
-    redirect_to driver_path(current_driver)
+    #driver contorollerに記述
   end
 
   def show
+    @message = Message.new
   end
 
   def index
+    @rooms = Room.where(transport_company_id: current_transport_company.id)
   end
 
   def room_params

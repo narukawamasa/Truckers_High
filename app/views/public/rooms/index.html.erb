@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <%= link_to "元のページへ", drivers_path %>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">名前</th>
+      <th scope="col">DMルーム</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @rooms.each do |room| %>
+  <% if room.driver.transport_company_id == nil %>
+    <tr>
+      <th scope="row"></th>
+      <td><%= room.driver.name %></td>
+      <td><%= link_to "DMルームへ", room_path(room.id) %></td>
+      <td></td>
+    </tr>
+  <% end %>
+  <% end %>
+  </tbody>
+</table>
+</div>

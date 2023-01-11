@@ -62,10 +62,12 @@
           </tr>
           <% if @driver.rooms.exists? %>
           <tr>
+            <% unless @driver.transport_company_id == nil %>
             <td>
               <% room = Room.find_by(driver_id: @driver.id, transport_company_id: @driver.transport_company.id) %>
               <%= link_to "所属会社とのDMルームへ", room_path(room.id) %>
             </td>
+            <% end %>
           </tr>
           <% end %>
         </tbody>

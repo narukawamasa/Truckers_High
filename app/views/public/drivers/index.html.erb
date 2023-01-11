@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="row">
+    <%= link_to "退職者とのDMルーム一覧", rooms_path %>
+  </div>
 <table class="table">
   <thead>
     <tr>
@@ -14,7 +17,8 @@
       <th scope="row"><%= @number %></th>
       <td><%= driver.name %></td>
       <td><%= driver.phone_number %></td>
-      <td>ルームへ</td>
+      <% room = Room.find_by(driver_id: driver.id) %>
+      <td><%= link_to "DMルームへ", room_path(room.id) %></td>
     </tr>
     <% @number += 1 %>
     <% end %>
