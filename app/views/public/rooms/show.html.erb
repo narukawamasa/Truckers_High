@@ -2,16 +2,39 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col-6"></th>
-      <th scope="col-6"></th>
+      <th scope="col-6">運送会社</th>
+      <th scope="col-6">運転手</th>
     </tr>
   </thead>
   <tbody>
+    <% @messages.each do |message| %>
     <tr>
+      <% if message.messageable_type == "TransportCompany" %>
+      <td><%= message.message %>　<%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
       <td></td>
+      <% elsif message.messageable_type == "Driver" %>
       <td></td>
+      <td><%= message.message %>　<%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+      <% end %>
     </tr>
+    <% end %>
   </tbody>
 </table>
-<%= form_with model: 
+<% if driver_signed_in? %>
+  <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
+    <%= f.text_area :message %>
+    <%= f.hidden_field :messageable_type, :value => "Driver" %>
+    <%= f.hidden_field :messageable_id, :value => current_driver.id %>
+    <%= f.hidden_field :room_id, :value => @room.id %>
+    <%= f.submit "メッセージを送る" %>
+  <% end %>
+<% elsif transport_company_signed_in? %>
+  <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
+    <%= f.text_area :message %>
+    <%= f.hidden_field :messageable_type, :value => "TransportCompany" %>
+    <%= f.hidden_field :messageable_id, :value => current_transport_company.id %>
+    <%= f.hidden_field :room_id, :value => @room.id %>
+    <%= f.submit "メッセージを送る" %>
+  <% end %>
+<% end %>
 </div>

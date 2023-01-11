@@ -6,6 +6,8 @@ class Public::RoomsController < ApplicationController
 
   def show
     @message = Message.new
+    @room = Room.find(params[:id])
+    @messages = Message.where(room_id: @room.id)
   end
 
   def index
