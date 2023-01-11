@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       end
     end
     resources :bookmarks, only: [:index, :create, :destroy]
+    resources :rooms, only: [:create, :show, :index]
   end
 
 

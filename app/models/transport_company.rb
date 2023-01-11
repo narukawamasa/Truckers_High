@@ -7,6 +7,7 @@ class TransportCompany < ApplicationRecord
 
   has_many :drivers
   has_many :rooms
+  has_many :messages, as: :messageable
 
   def get_profile_image(width, height)
   unless profile_image.attached?

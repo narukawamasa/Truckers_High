@@ -12,6 +12,8 @@ class Driver < ApplicationRecord
   has_many :reviews
   has_many :review_comments
   has_many :rooms
+  has_many :messages, as: :messageable
+
 
   def get_profile_image(width, height)
   unless profile_image.attached?
