@@ -1,0 +1,2 @@
+module Admin::TransportCompaniesHelper
+end

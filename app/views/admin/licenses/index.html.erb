@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row">
+    <h4>免許新規登録</h4>
+    <%= form_with model: @license, url: admin_licenses_path, method: :post do |f| %>
+      <%= f.text_field :name %>
+      <%= f.submit "新規登録" %>
+    <% end %>
+  </div>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @licenses.each do |license| %>
+        <tr>
+          <td><%= license.name %></td>
+          <td>
+            <%= link_to "編集", edit_admin_license_path(license.id) %> <%= link_to "削除", admin_license_path(license.id), method: :delete, data: {confirm: "削除しますか？"} %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="row">
+    <div class="col-9">
+      <h3><%= @driver.name %>さんのマイページ</h3>
+    </div>
+    <div class="col-3 d-flex">
+      <h3 class="justify-content-end">
+        所属会社：
+        <% if @driver.transport_company_id == nil %>
+          無所属
+        <% else %>
+          <%= @driver.transport_company.name %>
+        <% end %>
+      </h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-5">
+      <%= image_tag @driver.get_profile_image(200,200) %>
+    </div>
+    <div class="col-7">
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">名前</th>
+            <td><%= @driver.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @driver.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">自己紹介文</th>
+            <td><%= @driver.introduction %></td>
+          </tr>
+          <tr>
+            <th scope="row">所持免許</th>
+            <td>
+            <% if @driver.possession_licenses.exists? %>
+              <% @driver.possession_licenses.each do |possession_license| %>
+                <%= possession_license.license.name %>
+              <% end %>
+            <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "元のページへ", admin_drivers_path %>
+    </div>
+  </div>
+</div>

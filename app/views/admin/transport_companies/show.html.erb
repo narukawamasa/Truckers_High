@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <%= image_tag @transport_company.get_profile_image(200,200) %>
+    </div>
+    <div class="col-7">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">会社名</th>
+            <td><%= @transport_company.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">住所</th>
+            <td><%= @transport_company.address_display %></td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @transport_company.phone_number %></td>
+          </tr>
+          <tr>
+            <th scope="row">会社紹介</th>
+            <td><%= @transport_company.introduction %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= link_to "元のページへ", admin_transport_companies_path %>
+    </div>
+  </div>
+</div>

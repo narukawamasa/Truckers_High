@@ -1,0 +1,38 @@
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">名前</th>
+      <th scope="col">電話番号</th>
+      <th scope="col">DMルーム</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @drivers.each do |driver| %>
+    <tr>
+      <th scope="row"><%= @number %></th>
+      <td>
+        <%= link_to admin_driver_path(driver.id) do %>
+          <%= driver.name %>
+        <% end %>
+      </td>
+      <td><%= driver.phone_number %></td>
+      <% if driver.transport_company_id == nil %>
+        <td>
+          無所属
+        </td>
+      <% else %>
+        <td>
+          <%= link_to admin_transport_company_path(driver.transport_company.id) do %>
+            <%= driver.transport_company.name %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+    <% @number += 1 %>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "元のページへ", admin_root_path %>
+</div>
