@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-6">
+      <%= link_to "会社ページへ戻る", admin_company_path(params[:company_id]) %>
+    </div>
+  </div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">目的</th>
+      <th scope="col">投稿日時</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td>
+          <%= link_to admin_company_review_path(company_id: review.company.id, id: review.id) do %>
+            <%= review.objective_i18n %>
+          <% end %>
+        </td>
+        <td><%= review.created_at.strftime('%Y/%m/%d') %></td>
+        <% if review.deletion == true %>
+        <td>違反レビュー</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

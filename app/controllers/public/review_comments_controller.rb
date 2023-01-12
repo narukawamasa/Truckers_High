@@ -8,6 +8,8 @@ class Public::ReviewCommentsController < ApplicationController
     redirect_to request.referer
   end
 
+  private
+
   def review_comment_params
     params.require(:review_comment).permit(:driver_id, :review_id, :comment, :deletion)
   end
