@@ -16,6 +16,13 @@
   </thead>
   <tbody>
     <% @reviews.each do |review| %>
+      <% if review.deletion == true %>
+      <tr>
+        <td>
+          管理者から違反レビューと診断されました
+        </td>
+      </tr>
+      <% elsif review.deletion == false %>
       <tr>
         <td>
           <%= link_to company_review_path(company_id: review.company.id, id: review.id) do %>
@@ -24,6 +31,7 @@
         </td>
         <td><%= review.created_at.strftime('%Y/%m/%d') %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
