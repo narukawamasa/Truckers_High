@@ -1,0 +1,66 @@
+<%= form_with model: @company, url: admin_company_path, local:true, method: :patch do |f| %>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-1">
+      <div></div>
+    </div>
+    <div>
+      <h5 style="background-color:#f4f4f4">　会社編集　</h5>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :会社画像 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.file_field :profile_image, accept: "image/*", autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :会社名＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_field :name, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :郵便番号 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_field :postal_code, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :住所＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_field :address, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-2">
+      <div><%= f.label :電話番号 %></div>
+    </div>
+    <div class="col-10">
+      <div><%= f.text_field :phone_number, autofocus: true %></div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-2">
+      <div></div>
+    </div>
+    <div class="col-4">
+      <div><%= f.submit "編集する", class: 'px-5 btn btn-success' %></div>
+    </div>
+  </div>
+</div>
+<%end%>

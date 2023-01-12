@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5">
+      <%= image_tag @company.get_profile_image(200,200) %>
+    </div>
+    <div class="col-7">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">会社名</th>
+            <td><%= @company.name %></td>
+          </tr>
+          <tr>
+            <th scope="row">住所</th>
+            <td><%= @company.address_display %></td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td><%= @company.phone_number %></td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to "編集する", edit_admin_company_path(@company.id) %>
+            </td>
+            <td>
+              <%= link_to "削除する", admin_company_path(@company.id), method: :delete, data: {confirm: "本当に削除しますか？"} %>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <%= link_to admin_company_reviews_path(@company) do %>
+                レビュー数:<%= @company.reviews.count %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
