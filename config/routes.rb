@@ -35,8 +35,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:create]
     end
   end
-  
-  
+
+  namespace :admin do
+    root to: 'homes#top'
+  end
 
 
 
