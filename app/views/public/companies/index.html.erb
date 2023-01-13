@@ -1,4 +1,16 @@
+<div class="search_form">
+  <%= form_with url: companies_path, local: true, method: :get do |f| %>
+    <%= f.text_field :word, placeholder:"会社名を記入" %>
+    <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+    <%= f.submit "検索", class: "btn btn-primary" %>
+  <% end %>
+</div>
 <div class="container">
+  <% if @word_error.present? %>
+    <h3>”<%= @word_error %>”で一致する会社はありません。</h3>
+  <% elsif @word.present? %>
+    <h3>”<%= @word %>”での検索結果</h3>
+  <% end %>
   <div class="row">
     <%= link_to "新規登録", new_company_path %>
   </div>
