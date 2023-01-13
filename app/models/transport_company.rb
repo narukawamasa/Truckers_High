@@ -21,4 +21,23 @@ class TransportCompany < ApplicationRecord
   '〒' + postal_code + ' ' + address
   end
 
+  # def self.looks(search, word)
+  #   if search == "perfect_match"
+  #     @transport_companies = TransportCompany.where("name LIKE?", "#{word}")
+  #     #@word_true = @word
+  #   elsif search == "forward_match"
+  #     @transport_companies = TransportCompany.where("name LIKE?","#{word}%")
+  #     #@word_true = @word
+  #   elsif search == "backward_match"
+  #     @transport_companies = TransportCompany.where("name LIKE?","%#{word}")
+  #     #@word_true = @word
+  #   elsif search == "partial_match"
+  #     @transport_companies = TransportCompany.where("name LIKE?","%#{word}%")
+  #     #@word_true = @word
+  #   else
+  #     @transport_companies = TransportCompany.all
+  #     #@word_error = @word
+  #   end
+  # end
+
 end

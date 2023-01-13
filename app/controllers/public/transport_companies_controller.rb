@@ -8,8 +8,34 @@ class Public::TransportCompaniesController < ApplicationController
   end
 
   def index
-    @transport_companies = TransportCompany.all
     @number = 1
+    if params[:word] == nil || params[:word] == ""
+      @transport_companies = TransportCompany.all
+    else
+      word = params[:word]
+      search = params[:search]
+      if search == "perfect_match"
+        @transport_companies = TransportCompany.where("name LIKE?", "#{word}")
+        @word = word
+      elsif search == "forward_match"
+        @transport_companies = TransportCompany.where("name LIKE?","#{word}%")
+        @word = word
+      elsif search == "backward_match"
+        @transport_companies = TransportCompany.where("name LIKE?","%#{word}")
+        @word = word
+      elsif search == "partial_match"
+        @transport_companies = TransportCompany.where("name LIKE?","%#{word}%")
+        @word = word
+      else
+        @transport_companies = TransportCompany.all
+      end
+
+      unless @transport_companies.exists?
+        @transport_companies = TransportCompany.all
+        @word_error = word
+      end
+
+    end
   end
 
   def edit

@@ -3,7 +3,7 @@ class Driver < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-    has_one_attached :profile_image
+  has_one_attached :profile_image
 
   belongs_to :transport_company, optional: true
   # optional: true でnilを許容し、バリデーションに引っかからないようにする
