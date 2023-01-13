@@ -22,7 +22,21 @@ class Public::ReviewsController < ApplicationController
 
   def index
     company = Company.find(params[:company_id])
-    @reviews = Review.where(company_id: company.id)
+    search = params[:search]
+    if params[:search] == nil || params[:search] == ""
+      @reviews = Review.where(company_id: company.id)
+    else
+
+      if search == "0"
+        @reviews = Review.where(company_id: company.id, objective: 0)
+      elsif search == "1"
+        @reviews = Review.where(company_id: company.id, objective: 1)
+      elsif search == "2"
+        @reviews = Review.where(company_id: company.id, objective: 2)
+      else
+        @reviews = Review.where(company_id: company.id)
+      end
+    end
   end
 
   def edit

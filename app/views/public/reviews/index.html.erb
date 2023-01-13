@@ -7,6 +7,27 @@
       <%= link_to "会社ページへ戻る", company_path(params[:company_id]) %>
     </div>
   </div>
+    <%= form_with url: company_reviews_path, local: true, method: :get do |f| %>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :search, 0 %>
+      <%= f.label :objective_wholesale, Review.objectives_i18n[:wholesale] %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :search, 1 %>
+      <%= f.label :objective_loading, Review.objectives_i18n[:loading] %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :search, 2 %>
+      <%= f.label :objective_other, Review.objectives_i18n[:other] %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :search, 3 %>
+      <%= f.label :すべて %>
+    </div>
+    <div class="form-check form-check-inline">
+      <%= f.submit "検索" %>
+    </div>
+    <% end %>
 <table class="table">
   <thead>
     <tr>
