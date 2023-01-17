@@ -59,3 +59,5 @@ gem 'devise'
 
 gem "enum_help"
 gem 'pry-rails'
+
+gem 'cocoon'

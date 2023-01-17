@@ -7,7 +7,8 @@ class Driver < ApplicationRecord
 
   belongs_to :transport_company, optional: true
   # optional: true でnilを許容し、バリデーションに引っかからないようにする
-  has_many :possession_licenses, dependent: :destroy
+  has_many :possession_licenses, inverse_of: :driver, dependent: :destroy
+  accepts_nested_attributes_for :possession_licenses, allow_destroy: true
   has_many :bookmarks, dependent: :destroy
   has_many :reviews
   has_many :review_comments
