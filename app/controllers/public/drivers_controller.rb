@@ -11,6 +11,7 @@ class Public::DriversController < ApplicationController
 
   def edit
     @driver = Driver.find(params[:id])
+    @licenses = License.all
   end
 
   def update
@@ -40,7 +41,7 @@ class Public::DriversController < ApplicationController
   private
 
   def driver_params
-    params.require(:driver).permit(:transport_company_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :introduction, :phone_number, :email, :profile_image)
+    params.require(:driver).permit(:transport_company_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :introduction, :phone_number, :email, :profile_image, possession_licenses_attributes: [:license_id, :_destroy])
   end
 
 

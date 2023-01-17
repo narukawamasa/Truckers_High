@@ -88,9 +88,18 @@
   </div>
 
   <div class="row mt-3">
-    <div class="col-2">
-      <div></div>
+    <div class="col-2"></div>
+    <div class="col-5">
+      <%= f.fields_for :possession_licenses, @driver.possession_licenses.build, local: true do |l| %>
+        <%= render 'possession_license_fields', f: l %>
+      <% end %>
+      <div class='links'>
+        <%= link_to_add_association 'add task', f, :possession_licenses %>
+      </div>
     </div>
+  </div>
+  <div class="row my-2">
+    <div class="col-2"></div>
     <div class="col-4">
       <div><%= f.submit "編集内容を保存", class: 'px-5 btn btn-success' %></div>
     </div>
