@@ -11,58 +11,78 @@
     <%= stylesheet_link_tag 'application', :media => 'all' %>
   </head>
 
-  <body class="h-100">
-    <header class="w-100 d-flex justify-content-between align-items-center bg-light px-3 mb-4">
-    <% if admin_signed_in? %>
-      <h1 class="mx-2 fs-4"><a class="navbar-brand p-3" href="/admin"><%= image_tag('logo.png') %></a></h1>
-    <% else %>
-      <% if driver_signed_in? %>
-        <h1 class="mx-2 fs-4">
-          <%= link_to driver_path(current_driver.id),class:"navbar-brand p-3" do %>
-            <%= image_tag('logo.png') %>
-          <% end %>
-        </h1>
-      <% elsif transport_company_signed_in? %>
-        <h1 class="mx-2 fs-4">
-          <%= link_to transport_company_path(current_transport_company.id),class:"navbar-brand p-3" do %>
-            <%= image_tag('logo.png') %>
-          <% end %>
-        </h1>
-      <% else %>
-        <h1 class="mx-2 fs-4"><a class="navbar-brand p-3" href="/"><%= image_tag('logo.png') %></a></h1>
-      <% end %>
-    <% end %>
+  <body>
+    <header class="shadow-sm">
+      <nav class="navbar navbar-expand-lg navbar-light">
 
-      <ul class="navbar-nav d-flex flex-row">
-        <% if transport_company_signed_in? %>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "マイページ", transport_company_path(current_transport_company), class:"nav-link text-secondary" %>
-        </li>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "所属運転手一覧", drivers_path, class:"nav-link text-secondary" %>
-        </li>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "ログアウト", destroy_transport_company_session_path, method: :delete, class:"nav-link text-secondary" %>
-        </li>
-        <% elsif driver_signed_in? %>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "マイページ", driver_path(current_driver), class:"nav-link text-secondary" %>
-        </li>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "会社一覧", companies_path, class:"nav-link text-secondary" %>
-        </li>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "運送会社一覧", transport_companies_path, class:"nav-link text-secondary" %>
-        </li>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "ログアウト", destroy_driver_session_path, method: :delete, class:"nav-link text-secondary" %>
-        </li>
-        <% elsif admin_signed_in? %>
-        <li class="nav-item mx-3 text-muted">
-          <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link text-secondary" %>
-        </li>
+        <% if admin_signed_in? %>
+          <h1 class="mx-2 fs-4"><a class="navbar-brand p-3" href="/admin"><%= image_tag('logo.png') %></a></h1>
+        <% else %>
+          <% if driver_signed_in? %>
+            <h1 class="mx-2 fs-4">
+              <%= link_to driver_path(current_driver.id),class:"navbar-brand p-3" do %>
+                <%= image_tag('logo.png') %>
+              <% end %>
+            </h1>
+          <% elsif transport_company_signed_in? %>
+            <h1 class="mx-2 fs-4">
+              <%= link_to transport_company_path(current_transport_company.id),class:"navbar-brand p-3" do %>
+                <%= image_tag('logo.png') %>
+              <% end %>
+            </h1>
+          <% else %>
+            <h1 class="mx-2 fs-4"><a class="navbar-brand p-3" href="/"><%= image_tag('logo.png') %></a></h1>
+          <% end %>
         <% end %>
-      </ul>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse ml-auto" id="navbarNavDropdown">
+            <ul class="navbar-nav ms-auto">
+              <% if transport_company_signed_in? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "マイページ", transport_company_path(current_transport_company), class:"nav-link text-secondary" %>
+              </li>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "所属運転手一覧", drivers_path, class:"nav-link text-secondary" %>
+              </li>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "ログアウト", destroy_transport_company_session_path, method: :delete, class:"nav-link text-secondary" %>
+              </li>
+              <% elsif driver_signed_in? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "マイページ", driver_path(current_driver), class:"nav-link text-secondary" %>
+              </li>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "会社一覧", companies_path, class:"nav-link text-secondary" %>
+              </li>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "運送会社一覧", transport_companies_path, class:"nav-link text-secondary" %>
+              </li>
+              <% if current_driver.transport_company_id != nil %>
+              <li class="nav-item mx-3 text-muted">
+                <% @room = Room.find_by(driver_id: current_driver.id, transport_company_id: current_driver.transport_company_id) %>
+                <%= form_with model: [@room,Message.new], url: room_messages_path(@room.id), method: :post do |f| %>
+                  <%= f.hidden_field :message, :value => "終わりました。" %>
+                  <%= f.hidden_field :messageable_type, :value => "Driver" %>
+                  <%= f.hidden_field :messageable_id, :value => current_driver.id %>
+                  <%= f.hidden_field :room_id, :value => @room.id %>
+                  <%= f.submit "メッセージ：[終わりました]", class:"nav-link btn byn-lg btn-primary btn-block" %>
+                <% end %>
+              </li>
+              <% end %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "ログアウト", destroy_driver_session_path, method: :delete, class:"nav-link text-secondary" %>
+              </li>
+              <% elsif admin_signed_in? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link text-secondary" %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+
+      </nav>
     </header>
         <%= yield %>
     </div>

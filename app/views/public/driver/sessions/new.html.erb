@@ -1,17 +1,19 @@
 <div class="text-center">
   <div class="form-signin w-100 m-auto">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <h2 class="h3 mb-3 fw-normal">Log in</h2>
+  <h2 class="h3 mb-3 font-weight-normal">ログイン</h2>
     <div class="form-floating">
-      <%= f.label :email, for:"floatingInput" %>
-      <%= f.email_field :email, class:"form-control", id:"floatingInput" %>
+      <%= f.label :email, for:"inputEmail", class:"sr-only" %>
+      <%= f.email_field :email, class:"form-control", id:"inputEmail", placeholder:"メールアドレス" %>
+      <div class="invalid-feedback">
+              <!-- Valid first name is required. -->
+              名字を入力してください。
+      </div>
     </div>
-
     <div class="form-floating">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "current-password", class:"form-control" %>
+      <%= f.label :password, for:"inputPassword", class:"sr-only" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class:"form-control", id:"inputPassword", placeholder:"パスワード" %>
     </div>
-
     <% if devise_mapping.rememberable? %>
       <div class="form-check mb-3">
         <%= f.check_box :remember_me %>
@@ -20,7 +22,7 @@
     <% end %>
 
     <div>
-      <%= f.submit "Log in", class:"mt-5 mb-3 text-muted" %>
+      <%= f.submit "ログイン", class:"btn byn-lg btn-primary btn-block" %>
     </div>
   <% end %>
 

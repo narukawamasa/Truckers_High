@@ -4,7 +4,7 @@ class Public::MessagesController < ApplicationController
     @message = Message.new(message_params)
     #byebug
     @message.save
-    redirect_to request.referer
+    redirect_to room_path(@message.room_id)
   end
 
   private
