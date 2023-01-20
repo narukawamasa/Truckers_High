@@ -9,6 +9,23 @@ class TransportCompany < ApplicationRecord
   has_many :rooms
   has_many :messages, as: :messageable
 
+
+  def exsits_uncheck_messages?
+    result = false
+    rooms.each do | room |
+      room.messages.each do |message|
+        if message.messageable_type == "Driver"
+          if message.notification.confirmation_status == false
+            result = true
+          end
+        end
+      end
+    end
+
+    result
+  end
+
+
   def get_profile_image(width, height)
   unless profile_image.attached?
     file_path = Rails.root.join('app/assets/images/no-image.png')

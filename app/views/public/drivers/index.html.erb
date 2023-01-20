@@ -21,6 +21,9 @@
       <td><%= driver.phone_number %></td>
       <% room = Room.find_by(driver_id: driver.id) %>
       <td><%= link_to "DMルームへ", room_path(room.id) %></td>
+      <% if driver.transport_company.exsits_uncheck_messages? %>
+      <td>未読あり</td>
+      <% end %>
     </tr>
     <% @number += 1 %>
     <% end %>

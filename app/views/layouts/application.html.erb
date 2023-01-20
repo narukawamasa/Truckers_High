@@ -46,10 +46,16 @@
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "所属運転手一覧", drivers_path, class:"nav-link text-secondary" %>
               </li>
+              <% if current_transport_company.exsits_uncheck_messages? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "未読あり", drivers_path, class:"nav-link text-danger" %>
+              </li>
+              <% end %>
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "ログアウト", destroy_transport_company_session_path, method: :delete, class:"nav-link text-secondary" %>
               </li>
               <% elsif driver_signed_in? %>
+              <% room_driver = Room.find_by(driver_id: current_driver.id, transport_company_id: current_driver.transport_company_id) %>
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "マイページ", driver_path(current_driver), class:"nav-link text-secondary" %>
               </li>
@@ -59,18 +65,22 @@
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "運送会社一覧", transport_companies_path, class:"nav-link text-secondary" %>
               </li>
-              <% if current_driver.transport_company_id != nil %>
+              <% if current_driver.exsits_uncheck_messages? %>
               <li class="nav-item mx-3 text-muted">
-                <% @room = Room.find_by(driver_id: current_driver.id, transport_company_id: current_driver.transport_company_id) %>
-                <%= form_with model: [@room,Message.new], url: room_messages_path(@room.id), method: :post do |f| %>
-                  <%= f.hidden_field :message, :value => "終わりました。" %>
-                  <%= f.hidden_field :messageable_type, :value => "Driver" %>
-                  <%= f.hidden_field :messageable_id, :value => current_driver.id %>
-                  <%= f.hidden_field :room_id, :value => @room.id %>
-                  <%= f.submit "メッセージ：[終わりました]", class:"nav-link btn byn-lg btn-primary btn-block" %>
-                <% end %>
+                <%= link_to "未読あり", room_path(room_driver.id), class:"nav-link text-danger" %>
               </li>
               <% end %>
+                <% if current_driver.transport_company_id != nil %>
+                <li class="nav-item mx-3 text-muted">
+                  <%= form_with model: [room_driver,Message.new], url: room_messages_path(room_driver.id), method: :post do |f| %>
+                    <%= f.hidden_field :message, :value => "終わりました。" %>
+                    <%= f.hidden_field :messageable_type, :value => "Driver" %>
+                    <%= f.hidden_field :messageable_id, :value => current_driver.id %>
+                    <%= f.hidden_field :room_id, :value => room_driver.id %>
+                    <%= f.submit "メッセージ：[終わりました]", class:"nav-link btn byn-lg btn-primary btn-block" %>
+                  <% end %>
+                </li>
+                <% end %>
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "ログアウト", destroy_driver_session_path, method: :delete, class:"nav-link text-secondary" %>
               </li>
@@ -85,16 +95,12 @@
       </nav>
     </header>
         <%= yield %>
-    </div>
-     <footer class="fixed-bottom bg-dark text-white mt-4">
+
+     <footer class="bg-dark text-white mt-4">
       <div class="container">
         <div class="row no-gutters">
           <div class="col-md-4 p-3">
             <%= image_tag('logo_footer.png') %>
-          </div>
-          <div class="col-md-8">
-            <ul class="p-0 list-unstyled">
-            </ul>
           </div>
         </div>
       </div>

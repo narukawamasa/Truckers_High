@@ -8,6 +8,21 @@ class Public::RoomsController < ApplicationController
     @message = Message.new
     @room = Room.find(params[:id])
     @messages = Message.where(room_id: @room.id)
+    if driver_signed_in?
+      @message_transport_company = @messages.where(messageable_type: "TransportCompany")
+      @message_transport_company.each do |message|
+        if message.notification.confirmation_status == false
+          message.notification.update(confirmation_status: true)
+        end
+      end
+    elsif transport_company_signed_in?
+      @message_driver = @messages.where(messageable_type: "Driver")
+      @message_driver.each do |message|
+        if message.notification.confirmation_status == false
+          message.notification.update(confirmation_status: true)
+        end
+      end
+    end
   end
 
   def index
