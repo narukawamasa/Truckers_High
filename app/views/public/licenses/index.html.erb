@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <h4>免許新規登録</h4>
-    <%= form_with model: @license, url: licenses_path, method: :post do |f| %>
+    <%= form_with model: @license, url: licenses_path, method: :post, local: false do |f| %>
       <%= f.text_field :name %>
       <%= f.submit "新規登録" %>
     <% end %>
@@ -14,7 +14,7 @@
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="license-btn">
         <%= render 'index', licenses: @licenses, possession_license: @possession_license %>
       </tbody>
     </table>

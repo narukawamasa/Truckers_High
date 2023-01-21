@@ -6,9 +6,10 @@ class Admin::LicensesController < ApplicationController
   end
 
   def create
+    @licenses = License.all
     @license = License.new(license_params)
     @license.save
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   def edit
