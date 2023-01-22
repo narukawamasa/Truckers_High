@@ -10,7 +10,7 @@ class Public::ReviewsController < ApplicationController
     @review = current_driver.reviews.new(review_params)
     @review.company_id = @company.id
     @review.save
-    #redirect_to company_reviews_path
+    redirect_to company_reviews_path
   end
 
   def show

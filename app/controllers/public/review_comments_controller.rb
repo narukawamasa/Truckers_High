@@ -5,7 +5,7 @@ class Public::ReviewCommentsController < ApplicationController
     @review_comment = current_driver.review_comments.new(review_comment_params)
     @review_comment.review_id = @review.id
     @review_comment.save
-    redirect_to request.referer
+    #redirect_to request.referer
   end
 
   private
