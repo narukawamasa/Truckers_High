@@ -24,8 +24,27 @@
         <th scope="col"></th>
       </tr>
     </thead>
-    <tbody class="bookmark-btn">
-      <%= render 'public/bookmarks/btn', companies: @companies, bookmark: @bookmark %>
+    <tbody >
+      <% @companies.each do |company| %>
+<tr>
+  <td>
+    <%= link_to company_path(company.id) do %>
+      <%= company.name %>
+    <% end %>
+  </td>
+  <td>〒<%= company.postal_code %></td>
+  <td><%= company.address %></td>
+  <td><%= company.phone_number %></td>
+  <td class="btn_<%= company.id %>">
+    <%= render 'public/bookmarks/btn',  company: company %>
+  </td>
+</tr>
+<% end %>
+
+
+
+
+
     </tbody>
   </table>
 </div>

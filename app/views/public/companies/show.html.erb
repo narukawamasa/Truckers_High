@@ -25,17 +25,8 @@
             <td><%= @company.phone_number %></td>
           </tr>
           <tr>
-            <td>
-              <% if @company.bookmarks.exists?(driver_id: current_driver.id) %>
-              <% bookmark = Bookmark.find_by(driver_id: current_driver.id, company_id: @company.id) %>
-                <%= link_to "ブックマークから外す", bookmark_path(bookmark), method: :delete %>
-              <% else %>
-                <%= form_with model: @bookmark, url: bookmarks_path, method: :post do |f| %>
-                  <%= f.hidden_field :driver_id, :value => current_driver.id %>
-                  <%= f.hidden_field :company_id, :value => @company.id %>
-                  <%= f.submit "ブックマークする" %>
-                <% end %>
-              <% end %>
+            <td class="btn_<%= @company.id%>">
+              <%= render 'public/bookmarks/btn', company: @company %>
             </td>
           </tr>
           <tr>

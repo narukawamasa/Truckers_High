@@ -1,24 +1,10 @@
-<% companies.each do |company| %>
-<tr>
-  <td>
-    <%= link_to company_path(company.id) do %>
-      <%= company.name %>
-    <% end %>
-  </td>
-  <td>〒<%= company.postal_code %></td>
-  <td><%= company.address %></td>
-  <td><%= company.phone_number %></td>
-  <td>
-    <% if company.bookmarks.exists?(driver_id: current_driver.id) %>
+<% if company.bookmarks.exists?(driver_id: current_driver.id) %>
     <% bookmark = Bookmark.find_by(driver_id: current_driver.id, company_id: company.id) %>
-      <%= link_to "ブックマークから外す", bookmark_path(bookmark), method: :delete, remote: true, class:"btn btn-warning btn-sm" %>
+      <%= link_to "ブックマークから外す",  company_bookmark_path(bookmark.company,bookmark), method: :delete, remote: true, class:"btn btn-warning btn-sm" %>
     <% else %>
-      <%= form_with model: bookmark, url: bookmarks_path, method: :post, local: false do |f| %>
+      <%= form_with model: Bookmark.new, url: bookmarks_path, method: :post, local: false do |f| %>
         <%= f.hidden_field :driver_id, :value => current_driver.id %>
         <%= f.hidden_field :company_id, :value => company.id %>
         <%= f.submit "ブックマークする", class:"btn btn-success btn-sm " %>
       <% end %>
     <% end %>
-  </td>
-</tr>
-<% end %>

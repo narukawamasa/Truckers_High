@@ -57,17 +57,12 @@
     <div class="col-5">
       <% @review_comments.each do |review_comment| %>
         <div>
-          <% if review_comment.deletion == true %>
-            <p>管理者から違反コメントと診断されました</p>
-          <% elsif review_comment.deletion == false %>
-            <p><%= review_comment.comment %>　<%= review_comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
-          <% end %>
+          <%= render 'public/review_comments/comment', review_comment: review_comment %>
         </div>
       <% end %>
-      <%= form_with model: [@company, @review, @review_comment] do |f| %>
-        <%= f.text_field :comment %>
-        <%= f.submit "コメントを残す" %>
-      <% end %>
+      <div class="comment_area">
+        <%= render 'public/review_comments/form', company: @company, review: @review, review_comment: @review_comment %>
+      </div>
     </div>
   </div>
 </div>
