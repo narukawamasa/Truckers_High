@@ -1,2 +1,4 @@
-$("comment_area").html("<%= j(render 'public/review_comments/form', company: @company, review: @review, review_comment: @review_comment) %>");
-$("textfield").val('');
+$("#review_comment_comment").val('');
+$(".comment").html("<%= j(render 'public/review_comments/comment', review: @review_comment.review) %>");
+
+

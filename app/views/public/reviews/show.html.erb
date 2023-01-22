@@ -55,14 +55,10 @@
       </table>
     </div>
     <div class="col-5">
-      <% @review_comments.each do |review_comment| %>
-        <div>
-          <%= render 'public/review_comments/comment', review_comment: review_comment %>
-        </div>
-      <% end %>
-      <div class="comment_area">
-        <%= render 'public/review_comments/form', company: @company, review: @review, review_comment: @review_comment %>
+      <div class="comment">
+        <%= render 'public/review_comments/comment', company: @company, review: @review, review_comments: @review_comments %>
       </div>
+        <%= render 'public/review_comments/form', company: @company, review: @review %>
     </div>
   </div>
 </div>
