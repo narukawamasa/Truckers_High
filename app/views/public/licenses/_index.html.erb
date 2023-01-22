@@ -3,9 +3,9 @@
     <td><%= license.name %></td>
     <td>
       <% if license.possession_licenses.exists? && license.possession_licenses.exists?(driver_id: current_driver.id) %>
-        <%= link_to "外す", possession_license_path(license.id), method: :delete %>
+        <%= link_to "外す", possession_license_path(license.id), method: :delete, remote: true %>
       <% else %>
-        <%= form_with model: possession_license, url: possession_licenses_path, method: :post do |f| %>
+        <%= form_with model: possession_license, url: possession_licenses_path, method: :post, local: false do |f| %>
           <%= f.hidden_field :license_id, :value => license.id %>
           <%= f.hidden_field :driver_id, :value => current_driver.id %>
           <%= f.submit "所持" %>
