@@ -17,18 +17,15 @@ class Public::CompaniesController < ApplicationController
     else
       word = params[:word]
       search = params[:search]
-      if search == "perfect_match"
-        @companies = Company.where("name LIKE?", "#{word}")
-        @word = word
-      elsif search == "forward_match"
-        @companies = Company.where("name LIKE?","#{word}%")
-        @word = word
-      elsif search == "backward_match"
-        @companies = Company.where("name LIKE?","%#{word}")
-        @word = word
-      elsif search == "partial_match"
-        @companies = Company.where("name LIKE?","%#{word}%")
-        @word = word
+      range = params[:range]
+      if search == "partial_match"
+        if range == "name"
+          @companies = Company.where("name LIKE?","%#{word}%")
+          @word = word
+        elsif range == "adress"
+          @companies = Company.where("address LIKE?","%#{word}%")
+          @word = word
+        end
       else
         @companies = Company.all
       end
