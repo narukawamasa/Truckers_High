@@ -10,25 +10,25 @@ class Public::TransportCompaniesController < ApplicationController
   def index
     @number = 1
     if params[:word] == nil || params[:word] == ""
-      @transport_companies = TransportCompany.all
+      @transport_companies = TransportCompany.page(params[:page])
     else
       word = params[:word]
       search = params[:search]
       range = params[:range]
       if search == "partial_match"
         if range == "name"
-          @transport_companies = TransportCompany.where("name LIKE?","%#{word}%")
+          @transport_companies = TransportCompany.where("name LIKE?","%#{word}%").page(params[:page])
           @word = word
         elsif range == "adress"
-          @transport_companies = TransportCompany.where("address LIKE?","%#{word}%")
+          @transport_companies = TransportCompany.where("address LIKE?","%#{word}%").page(params[:page])
           @word = word
         end
       else
-        @transport_companies = TransportCompany.all
+        @transport_companies = TransportCompany.page(params[:page])
       end
 
       unless @transport_companies.exists?
-        @transport_companies = TransportCompany.all
+        @transport_companies = TransportCompany.page(params[:page])
         @word_error = word
       end
 

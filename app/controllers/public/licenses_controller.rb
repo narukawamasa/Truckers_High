@@ -1,7 +1,7 @@
 class Public::LicensesController < ApplicationController
 
   def index
-    @licenses = License.all
+    @licenses = License.page(params[:page])
     @license = License.new
     @possession_license = PossessionLicense.new
     

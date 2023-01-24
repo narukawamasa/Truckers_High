@@ -24,17 +24,17 @@ class Public::ReviewsController < ApplicationController
     company = Company.find(params[:company_id])
     search = params[:search]
     if params[:search] == nil || params[:search] == ""
-      @reviews = Review.where(company_id: company.id)
+      @reviews = Review.where(company_id: company.id).page(params[:page])
     else
 
       if search == "0"
-        @reviews = Review.where(company_id: company.id, objective: 0)
+        @reviews = Review.where(company_id: company.id, objective: 0).page(params[:page])
       elsif search == "1"
-        @reviews = Review.where(company_id: company.id, objective: 1)
+        @reviews = Review.where(company_id: company.id, objective: 1).page(params[:page])
       elsif search == "2"
-        @reviews = Review.where(company_id: company.id, objective: 2)
+        @reviews = Review.where(company_id: company.id, objective: 2).page(params[:page])
       else
-        @reviews = Review.where(company_id: company.id)
+        @reviews = Review.where(company_id: company.id).page(params[:page])
       end
     end
   end

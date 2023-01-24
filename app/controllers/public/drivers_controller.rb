@@ -5,7 +5,7 @@ class Public::DriversController < ApplicationController
   end
 
   def index
-    @drivers = Driver.where(transport_company_id: current_transport_company.id)
+    @drivers = Driver.where(transport_company_id: current_transport_company.id).page(params[:page])
     @number = 1
   end
 
