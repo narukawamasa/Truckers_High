@@ -13,25 +13,25 @@ class Public::CompaniesController < ApplicationController
   def index
     @bookmark = Bookmark.new
     if params[:word] == nil || params[:word] == ""
-      @companies = Company.all
+      @companies = Company.page(params[:page])
     else
       word = params[:word]
       search = params[:search]
       range = params[:range]
       if search == "partial_match"
         if range == "name"
-          @companies = Company.where("name LIKE?","%#{word}%")
+          @companies = Company.where("name LIKE?","%#{word}%").page(params[:page])
           @word = word
         elsif range == "adress"
-          @companies = Company.where("address LIKE?","%#{word}%")
+          @companies = Company.where("address LIKE?","%#{word}%").page(params[:page])
           @word = word
         end
       else
-        @companies = Company.all
+        @companies = Company.page(params[:page])
       end
 
       unless @companies.exists?
-        @companies = Company.all
+        @companies = Company.page(params[:page])
         @word_error = word
       end
 
