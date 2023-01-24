@@ -1,7 +1,7 @@
 class Admin::LicensesController < ApplicationController
 
   def index
-    @licenses = License.all
+    @licenses = License.page(params[:page])
     @license = License.new
   end
 

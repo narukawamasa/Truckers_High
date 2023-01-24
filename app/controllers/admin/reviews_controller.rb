@@ -2,7 +2,7 @@ class Admin::ReviewsController < ApplicationController
 
   def index
     company = Company.find(params[:company_id])
-    @reviews = Review.where(company_id: company.id)
+    @reviews = Review.where(company_id: company.id).page(params[:page])
   end
 
   def show
