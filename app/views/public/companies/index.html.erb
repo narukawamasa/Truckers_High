@@ -1,19 +1,26 @@
-<div class="search_form">
-  <%= form_with url: companies_path, local: true, method: :get do |f| %>
-    <%= f.text_field :word, placeholder:"会社名を記入" %>
-    <%= f.hidden_field :search, :value => "partial_match" %>
-    <%= f.select :range, options_for_select([["会社名","name"], ["住所","adress"]]) %>
-    <%= f.submit "検索", class: "btn btn-primary" %>
-  <% end %>
+<div class="row">
+  <dic class="col-4"></dic>
+  <div class="search_form col-4">
+    <%= form_with url: companies_path, local: true, method: :get do |f| %>
+      <%= f.text_field :word, placeholder:"会社名を記入" %>
+      <%= f.hidden_field :search, :value => "partial_match" %>
+      <%= f.select :range, options_for_select([["会社名","name"], ["住所","adress"]]) %>
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    <% end %>
+  </div>
 </div>
 <div class="container">
-  <% if @word_error.present? %>
-    <h3>”<%= @word_error %>”で一致する会社はありません。</h3>
-  <% elsif @word.present? %>
-    <h3>”<%= @word %>”での検索結果</h3>
-  <% end %>
   <div class="row">
-    <%= link_to "新規登録", new_company_path %>
+    <div class="col-10">
+      <% if @word_error.present? %>
+        <h3>”<%= @word_error %>”で一致する会社はありません。</h3>
+      <% elsif @word.present? %>
+        <h3>”<%= @word %>”での検索結果</h3>
+      <% end %>
+    </div>
+    <div class="col-2">
+      <%= link_to "新規登録", new_company_path, class:"btn btn-success" %>
+    </div>
   </div>
   <table class="table">
     <thead>
@@ -27,25 +34,20 @@
     </thead>
     <tbody >
       <% @companies.each do |company| %>
-<tr>
-  <td>
-    <%= link_to company_path(company.id) do %>
-      <%= company.name %>
-    <% end %>
-  </td>
-  <td>〒<%= company.postal_code %></td>
-  <td><%= company.address %></td>
-  <td><%= company.phone_number %></td>
-  <td class="btn_<%= company.id %>">
-    <%= render 'public/bookmarks/btn',  company: company %>
-  </td>
-</tr>
-<% end %>
-
-
-
-
-
+      <tr>
+        <td>
+          <%= link_to company_path(company.id) do %>
+            <%= company.name %>
+          <% end %>
+        </td>
+        <td>〒<%= company.postal_code %></td>
+        <td><%= company.address %></td>
+        <td><%= company.phone_number %></td>
+        <td class="btn_<%= company.id %>">
+          <%= render 'public/bookmarks/btn',  company: company %>
+        </td>
+      </tr>
+      <% end %>
     </tbody>
   </table>
 </div>

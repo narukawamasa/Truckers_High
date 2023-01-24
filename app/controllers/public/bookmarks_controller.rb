@@ -1,7 +1,7 @@
 class Public::BookmarksController < ApplicationController
 
   def index
-    @bookmarks = current_driver.bookmarks.all
+    @bookmarks = current_driver.bookmarks.page(params[:page])
   end
 
   def create
@@ -17,6 +17,7 @@ class Public::BookmarksController < ApplicationController
     @bookmark.destroy
     @bookmark = Bookmark.new
     @company = Company.find(params[:company_id])
+    @bookmarks = current_driver.bookmarks.page(params[:page])
 
     #redirect_to bookmarks_path
   end

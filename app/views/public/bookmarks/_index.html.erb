@@ -1,0 +1,12 @@
+<% @bookmarks.each do |bookmark| %>
+<tr>
+  <td>
+    <%= link_to company_path(bookmark.company.id) do %>
+      <%= bookmark.company.name %>
+    <% end %>
+  </td>
+  <td><%= bookmark.company.phone_number %></td>
+  <td><%= bookmark.company.address_display %></td>
+  <td><%= link_to "ブックマークから外す", company_bookmark_path(bookmark.company, bookmark), method: :delete, remote: true, class:"btn btn-warning btn-sm" %></td>
+</tr>
+<% end %>

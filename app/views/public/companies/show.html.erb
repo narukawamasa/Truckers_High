@@ -35,7 +35,7 @@
                 レビュー数:<%= @company.reviews.count %>
               <% end %>
             </td>
-            <td><%= link_to "レビューを書く", new_company_review_path(@company) %></td>
+            <td><%= link_to "レビューを書く", new_company_review_path(@company), class:"btn btn-info btn-sm" %></td>
           </tr>
         </tbody>
       </table>

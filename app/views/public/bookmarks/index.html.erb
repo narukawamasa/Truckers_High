@@ -8,19 +8,8 @@
       <th scope="col"></th>
     </tr>
   </thead>
-  <tbody>
-    <% @bookmarks.each do |bookmark| %>
-    <tr>
-      <td>
-        <%= link_to company_path(bookmark.company.id) do %>
-          <%= bookmark.company.name %>
-        <% end %>
-      </td>
-      <td><%= bookmark.company.phone_number %></td>
-      <td><%= bookmark.company.address_display %></td>
-      <td><%= link_to "ブックマークから外す", bookmark_path(bookmark), method: :delete %></td>
-    </tr>
-    <% end %>
+  <tbody class="bookmark-index">
+    <%= render "public/bookmarks/index", bookmarks: @bookmarks %>
   </tbody>
 </table>
 </div>

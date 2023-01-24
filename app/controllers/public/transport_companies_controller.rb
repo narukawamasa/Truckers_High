@@ -14,18 +14,15 @@ class Public::TransportCompaniesController < ApplicationController
     else
       word = params[:word]
       search = params[:search]
-      if search == "perfect_match"
-        @transport_companies = TransportCompany.where("name LIKE?", "#{word}")
-        @word = word
-      elsif search == "forward_match"
-        @transport_companies = TransportCompany.where("name LIKE?","#{word}%")
-        @word = word
-      elsif search == "backward_match"
-        @transport_companies = TransportCompany.where("name LIKE?","%#{word}")
-        @word = word
-      elsif search == "partial_match"
-        @transport_companies = TransportCompany.where("name LIKE?","%#{word}%")
-        @word = word
+      range = params[:range]
+      if search == "partial_match"
+        if range == "name"
+          @transport_companies = TransportCompany.where("name LIKE?","%#{word}%")
+          @word = word
+        elsif range == "adress"
+          @transport_companies = TransportCompany.where("address LIKE?","%#{word}%")
+          @word = word
+        end
       else
         @transport_companies = TransportCompany.all
       end

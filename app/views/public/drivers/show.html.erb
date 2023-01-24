@@ -12,7 +12,9 @@
         <% if @driver.transport_company_id == nil %>
           <span>無所属</span>
         <% else %>
-          <span><%= @driver.transport_company.name %></span>
+          <%= link_to transport_company_path(@driver.transport_company.id) do %>
+            <span><%= @driver.transport_company.name %></span>
+          <% end %>
         <% end %>
     </div>
   </div>

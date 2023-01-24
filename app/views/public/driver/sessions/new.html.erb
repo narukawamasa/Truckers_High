@@ -1,7 +1,7 @@
 <div class="text-center">
   <div class="form-signin w-100 m-auto">
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <h2 class="h3 mb-3 font-weight-normal">ログイン</h2>
+  <h2 class="h3 mb-3 font-weight-normal">運転手ログイン画面</h2>
     <div class="form-floating">
       <%= f.label :email, for:"inputEmail", class:"sr-only" %>
       <%= f.email_field :email, class:"form-control", id:"inputEmail", placeholder:"メールアドレス" %>

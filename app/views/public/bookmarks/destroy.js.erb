@@ -1,1 +1,2 @@
 $(".btn_<%= @company.id%>").html("<%= j(render 'public/bookmarks/btn',company: @company) %>");
+$(".bookmark-index").html("<%= j(render "public/bookmarks/index", bookmarks: @bookmarks) %>");
