@@ -1,15 +1,14 @@
 <%= form_with model:@driver, url: driver_all_path(@driver.id), local:true, method: :patch do |f| %>
 <div class="container">
   <div class="row mb-5">
-    <div class="col-1">
-      <div></div>
-    </div>
+    <div class="col-5"></div>
     <div>
       <h5 style="background-color:#f4f4f4">　運転手情報編集　</h5>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :プロフィール画像 %></div>
     </div>
@@ -19,86 +18,75 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :氏名 %></div>
     </div>
     <div class="col-2">
       <div><%= f.text_field :family_name, autofocus: true %></div>
     </div>
-    <div class="col-1">
-      <div></div>
-    </div>
     <div class="col-2">
       <div><%= f.text_field :first_name, autofocus: true %></div>
-    </div>
-    <div class="col-2">
-      <div></div>
-    </div>
-    <div class="col-2">
-      <div></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :フリガナ %></div>
     </div>
     <div class="col-2">
       <div><%= f.text_field :family_name_kana, autofocus: true %></div>
     </div>
-    <div class="col-1">
-      <div></div>
-    </div>
     <div class="col-2">
       <div><%= f.text_field :first_name_kana, autofocus: true %></div>
-    </div>
-    <div class="col-2">
-      <div></div>
-    </div>
-    <div class="col-2">
-      <div></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :電話番号 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-7">
       <div><%= f.text_field :phone_number, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :メールアドレス %></div>
     </div>
-    <div class="col-10">
+    <div class="col-7">
       <div><%= f.email_field :email, autofocus: true, autocomplete: "email" %></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2">
       <div><%= f.label :自己紹介 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-7">
       <div><%= f.text_area :introduction, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row mt-3">
+    <div class="col-3"></div>
     <div class="col-2">所持してる免許</div>
     <div class="col-5">
       <%= f.fields_for :possession_licenses, @driver.possession_licenses.build, local: true do |l| %>
         <%= render 'possession_license_fields', f: l %>
       <% end %>
       <div class='links'>
-        <%= link_to_add_association '追加', f, :possession_licenses, class:"btn btn-primary btn-sm" %>
+        <%= link_to_add_association 'ボックス追加', f, :possession_licenses, class:"btn btn-primary btn-sm" %>
       </div>
     </div>
   </div>
   <div class="row my-2">
+    <div class="col-3"></div>
     <div class="col-2"></div>
     <div class="col-4">
       <div><%= f.submit "編集内容を保存", class: 'px-5 btn btn-success' %></div>
