@@ -20,21 +20,31 @@
     <% end %>
   </tbody>
 </table>
-<% if driver_signed_in? %>
-  <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
-    <%= f.text_area :message %>
-    <%= f.hidden_field :messageable_type, :value => "Driver" %>
-    <%= f.hidden_field :messageable_id, :value => current_driver.id %>
-    <%= f.hidden_field :room_id, :value => @room.id %>
-    <%= f.submit "メッセージを送る" %>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-4">
+  <% if driver_signed_in? %>
+    <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
+      <%= f.text_area :message, size: '50x5' %>
+      <%= f.hidden_field :messageable_type, :value => "Driver" %>
+      <%= f.hidden_field :messageable_id, :value => current_driver.id %>
+      <%= f.hidden_field :room_id, :value => @room.id %>
+      <%= f.submit "メッセージを送る", class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-4">
+  <% elsif transport_company_signed_in? %>
+    <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
+      <%= f.text_area :message, size: '50x5' %>
+      <%= f.hidden_field :messageable_type, :value => "TransportCompany" %>
+      <%= f.hidden_field :messageable_id, :value => current_transport_company.id %>
+      <%= f.hidden_field :room_id, :value => @room.id %>
+      <%= f.submit "メッセージを送る", class:"btn btn-primary" %>
+    <% end %>
+    </div>
   <% end %>
-<% elsif transport_company_signed_in? %>
-  <%= form_with model: [@room, @message], url: room_messages_path(@room.id), method: :post do |f| %>
-    <%= f.text_area :message %>
-    <%= f.hidden_field :messageable_type, :value => "TransportCompany" %>
-    <%= f.hidden_field :messageable_id, :value => current_transport_company.id %>
-    <%= f.hidden_field :room_id, :value => @room.id %>
-    <%= f.submit "メッセージを送る" %>
-  <% end %>
-<% end %>
+</div>
 </div>
