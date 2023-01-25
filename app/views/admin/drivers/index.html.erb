@@ -5,7 +5,7 @@
       <th scope="col">#</th>
       <th scope="col">名前</th>
       <th scope="col">電話番号</th>
-      <th scope="col">DMルーム</th>
+      <th scope="col">所属会社</th>
     </tr>
   </thead>
   <tbody>
@@ -34,6 +34,6 @@
     <% end %>
   </tbody>
 </table>
-<%= paginate @drivers %>
-<%= link_to "元のページへ", admin_root_path %>
+  <%= paginate @drivers %>
+  <%= link_to "元のページへ", admin_root_path %>
 </div>

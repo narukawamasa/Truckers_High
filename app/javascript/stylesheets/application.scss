@@ -1,2 +1,16 @@
 @import '~bootstrap/scss/bootstrap';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+main {
+  background-image: url(../../assets/truck-photo.png);
+  background-size: cover;
+  background-position: bottom;
+  padding: 50px 0px 0px 0px;
+  height: 100vh;
+  width: 100%;
+  background-repeat: no-repeat;
+}
+
+.container {
+  background: rgba(255,255,255,0.9);
+}
