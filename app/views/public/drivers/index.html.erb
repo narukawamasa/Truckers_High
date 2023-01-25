@@ -21,7 +21,7 @@
       <td><%= driver.phone_number %></td>
       <% room = Room.find_by(driver_id: driver.id) %>
       <td><%= link_to "DMルームへ", room_path(room.id) %></td>
-      <% if driver.exsits_messages? %>
+      <% if driver.exsits_drivercheck_messages? %>
       <td>未読あり</td>
       <% end %>
     </tr>

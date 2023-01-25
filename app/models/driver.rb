@@ -33,7 +33,7 @@ class Driver < ApplicationRecord
     result
   end
 
-  def exsits_messages?
+  def exsits_drivercheck_messages?
     #通知機能の為
     result = false
     rooms.each do | room |
