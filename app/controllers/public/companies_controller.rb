@@ -13,11 +13,15 @@ class Public::CompaniesController < ApplicationController
   def index
     @bookmark = Bookmark.new
     if params[:word] == nil || params[:word] == ""
+      #空白だった場合にすべての会社を表示
       @companies = Company.page(params[:page])
     else
       word = params[:word]
+      #検索ワード
       search = params[:search]
+      #部分一致のみ
       range = params[:range]
+      #会社名か住所を選択
       if search == "partial_match"
         if range == "name"
           @companies = Company.where("name LIKE?","%#{word}%").page(params[:page])

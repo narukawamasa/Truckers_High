@@ -11,6 +11,7 @@ class TransportCompany < ApplicationRecord
 
 
   def exsits_uncheck_messages?
+    #通知機能の為
     result = false
     rooms.each do | room |
       room.messages.each do |message|

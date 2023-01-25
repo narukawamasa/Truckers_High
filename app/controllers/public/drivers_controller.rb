@@ -16,6 +16,7 @@ class Public::DriversController < ApplicationController
 
   def update
     @driver = Driver.find(current_driver.id)
+    #下記運送会社に所属してない場合に、初めて所属した運送会社とのルームも同時に作成する
     if @driver.transport_company_id == nil
       @driver.update(driver_params)
       if @driver.rooms.exists?

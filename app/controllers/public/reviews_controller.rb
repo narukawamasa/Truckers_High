@@ -26,7 +26,7 @@ class Public::ReviewsController < ApplicationController
     if params[:search] == nil || params[:search] == ""
       @reviews = Review.where(company_id: company.id).page(params[:page])
     else
-
+      #卸しか積みかその他で検索をかけるため
       if search == "0"
         @reviews = Review.where(company_id: company.id, objective: 0).page(params[:page])
       elsif search == "1"

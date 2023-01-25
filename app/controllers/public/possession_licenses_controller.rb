@@ -5,7 +5,6 @@ class Public::PossessionLicensesController < ApplicationController
     possession_license.save
     @licenses = License.all
     @possession_license = PossessionLicense.new
-    #redirect_to request.referer
   end
 
   def destroy
@@ -13,7 +12,6 @@ class Public::PossessionLicensesController < ApplicationController
     possession_license.destroy
     @licenses = License.all
     @possession_license = PossessionLicense.new
-    #redirect_to request.referer
   end
 
   private

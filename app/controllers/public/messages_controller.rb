@@ -2,11 +2,9 @@ class Public::MessagesController < ApplicationController
 
   def create
     @message = Message.new(message_params)
-    #byebug
     @message.save
     @notification = Notification.new
     @notification.message_id = @message.id
-    
     @notification.save
     redirect_to room_path(@message.room_id)
   end
