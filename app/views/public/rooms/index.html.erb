@@ -17,7 +17,9 @@
       <th scope="row"></th>
       <td><%= room.driver.name %></td>
       <td><%= link_to "DMルームへ", room_path(room.id) %></td>
-      <td></td>
+      <% if room.driver.exsits_drivercheck_messages? %>
+      <td>未読あり</td>
+      <% end %>
     </tr>
   <% end %>
   <% end %>

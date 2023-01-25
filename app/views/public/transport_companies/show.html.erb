@@ -38,11 +38,19 @@
                 <% end %>
               </td>
               <% elsif current_driver.transport_company_id == @transport_company.id %>
-              <td>
-                <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
-                  <%= f.submit '所属から外れる', class:"btn btn-success" %>
+                <% if current_driver.exsits_uncheck_messages? %>
+                  <td>
+                    <% room = Room.find_by(driver_id: current_driver.id, transport_company_id: current_driver.transport_company.id) %>
+                    未読メッセージがある為、所属から外れられません。DMを確認してください。
+                    <%= link_to "DMルームへ", room_path(room.id) %>
+                  </td>
+                <% else %>
+                  <td>
+                    <%= form_with model: @driver, url: driver_path(current_driver), method: :patch do |f| %>
+                      <%= f.submit '所属から外れる', class:"btn btn-success" %>
+                    <% end %>
+                  </td>
                 <% end %>
-              </td>
               <% else %>
               <td>
                 <%= current_driver.transport_company.name %>に所属しています

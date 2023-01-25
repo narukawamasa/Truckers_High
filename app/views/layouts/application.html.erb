@@ -65,11 +65,11 @@
               <li class="nav-item mx-3 text-muted">
                 <%= link_to "運送会社一覧", transport_companies_path, class:"nav-link text-secondary" %>
               </li>
-              <!--<%# if current_driver.exsits_uncheck_messages? %>-->
-              <!--<li class="nav-item mx-3 text-muted">-->
-              <!--  <%#= link_to "未読あり", room_path(room_driver.id), class:"nav-link text-danger" %>-->
-              <!--</li>-->
-              <%# end %>
+              <% if current_driver.exsits_uncheck_messages? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "未読あり", room_path(room_driver.id), class:"nav-link text-danger" %>
+              </li>
+              <% end %>
                 <% if current_driver.transport_company_id != nil %>
                 <li class="nav-item mx-3 text-muted">
                   <%= form_with model: [room_driver,Message.new], url: room_messages_path(room_driver.id), method: :post do |f| %>
