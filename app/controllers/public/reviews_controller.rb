@@ -1,4 +1,5 @@
 class Public::ReviewsController < ApplicationController
+  before_action :authenticate_any!
 
   def new
     @company = Company.find(params[:company_id])
@@ -57,8 +58,18 @@ class Public::ReviewsController < ApplicationController
     end
   end
 
+  private
+
   def review_params
     params.require(:review).permit(:driver_id, :company_id, :objective, :method, :baggage, :vehicle, :reception_time, :order, :waiting_place, :other, :deletion)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 

@@ -1,4 +1,5 @@
 class Admin::ReviewCommentsController < ApplicationController
+  before_action :authenticate_admin!
 
   def update
     @review_comment = ReviewComment.find(params[:id])

@@ -1,4 +1,6 @@
 class Public::CompaniesController < ApplicationController
+  before_action :authenticate_any!
+
 
   def new
     @company = Company.new
@@ -56,6 +58,14 @@ class Public::CompaniesController < ApplicationController
 
   def company_params
     params.require(:company).permit(:name, :postal_code, :address, :phone_number, :profile_image)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 end

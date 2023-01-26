@@ -1,4 +1,5 @@
 class Admin::LicensesController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @licenses = License.page(params[:page])

@@ -1,4 +1,5 @@
 class Public::BookmarksController < ApplicationController
+  before_action :authenticate_any!
 
   def index
     @bookmarks = current_driver.bookmarks.page(params[:page])
@@ -26,6 +27,14 @@ class Public::BookmarksController < ApplicationController
 
   def bookmark_params
     params.require(:bookmark).permit(:driver_id, :company_id)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 

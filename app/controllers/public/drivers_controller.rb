@@ -1,4 +1,5 @@
 class Public::DriversController < ApplicationController
+  before_action :authenticate_any!
 
   def show
     @driver = Driver.find(params[:id])
@@ -60,6 +61,14 @@ class Public::DriversController < ApplicationController
 
   def driver_params
     params.require(:driver).permit(:transport_company_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :introduction, :phone_number, :email, :profile_image, possession_licenses_attributes: [:license_id, :_destroy])
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 

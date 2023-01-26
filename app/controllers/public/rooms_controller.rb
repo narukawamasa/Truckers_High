@@ -1,4 +1,6 @@
 class Public::RoomsController < ApplicationController
+  before_action :authenticate_any!
+
 
   def create
     #driver contorollerに記述
@@ -29,8 +31,18 @@ class Public::RoomsController < ApplicationController
     @rooms = Room.where(transport_company_id: current_transport_company.id)
   end
 
+  private
+
   def room_params
     params.require(:room).permit(:transport_company_id, :driver_id)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 end

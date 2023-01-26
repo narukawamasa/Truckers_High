@@ -1,5 +1,6 @@
 class Public::MessagesController < ApplicationController
-
+  before_action :authenticate_any!
+  
   def create
     @message = Message.new(message_params)
     @message.save
@@ -13,6 +14,14 @@ class Public::MessagesController < ApplicationController
 
   def message_params
     params.require(:message).permit(:messageable_type, :messageable_id, :room_id, :message)
+  end
+  
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 end

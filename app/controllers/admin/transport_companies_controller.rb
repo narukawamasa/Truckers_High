@@ -1,4 +1,5 @@
 class Admin::TransportCompaniesController < ApplicationController
+  before_action :authenticate_admin!
 
   def index
     @transport_companies = TransportCompany.page(params[:page])

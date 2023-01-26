@@ -1,4 +1,5 @@
 class Public::TransportCompaniesController < ApplicationController
+  before_action :authenticate_any!
 
   def show
     @transport_company = TransportCompany.find(params[:id])
@@ -52,6 +53,14 @@ class Public::TransportCompaniesController < ApplicationController
 
   def transport_company_params
     params.require(:transport_company).permit(:name, :postal_code, :address, :introduction, :phone_number, :email, :profile_image)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 end

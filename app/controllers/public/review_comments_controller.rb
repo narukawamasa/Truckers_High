@@ -1,4 +1,5 @@
 class Public::ReviewCommentsController < ApplicationController
+  before_action :authenticate_any!
 
   def create
     @review = Review.find(params[:review_id])
@@ -11,6 +12,14 @@ class Public::ReviewCommentsController < ApplicationController
 
   def review_comment_params
     params.require(:review_comment).permit(:driver_id, :review_id, :comment, :deletion)
+  end
+
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 end

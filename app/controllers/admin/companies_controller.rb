@@ -1,4 +1,6 @@
 class Admin::CompaniesController < ApplicationController
+  before_action :authenticate_admin!
+
 
   def index
     @companies = Company.page(params[:page])

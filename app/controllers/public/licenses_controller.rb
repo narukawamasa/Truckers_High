@@ -1,4 +1,5 @@
 class Public::LicensesController < ApplicationController
+  before_action :authenticate_any!
 
   def index
     @licenses = License.page(params[:page])
@@ -22,6 +23,14 @@ class Public::LicensesController < ApplicationController
 
   def license_params
     params.require(:license).permit(:name)
+  end
+  
+  def authenticate_any!
+    if driver_signed_in?
+        true
+    else
+        authenticate_transport_company!
+    end
   end
 
 

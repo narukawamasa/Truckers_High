@@ -1,4 +1,5 @@
 class Admin::DriversController < ApplicationController
+  before_action :authenticate_admin!
 
   def show
     @driver = Driver.find(params[:id])
