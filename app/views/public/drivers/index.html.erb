@@ -17,7 +17,11 @@
     <% @drivers.each do |driver| %>
     <tr>
       <th scope="row"><%= @number %></th>
-      <td><%= driver.name %></td>
+      <td>
+        <%= link_to driver_path(driver) do %>
+          <%= driver.name %>
+        <% end %>
+      </td>
       <td><%= driver.phone_number %></td>
       <% room = Room.find_by(driver_id: driver.id) %>
       <td><%= link_to "DMルームへ", room_path(room.id) %></td>

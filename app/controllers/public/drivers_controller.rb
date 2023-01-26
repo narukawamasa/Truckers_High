@@ -1,5 +1,6 @@
 class Public::DriversController < ApplicationController
   before_action :authenticate_any!
+  before_action :is_matching_login_driver, only: [:show, :edit, :update, :update_all]
 
   def show
     @driver = Driver.find(params[:id])
@@ -68,6 +69,20 @@ class Public::DriversController < ApplicationController
         true
     else
         authenticate_transport_company!
+    end
+  end
+
+  def is_matching_login_driver
+    if driver_signed_in?
+      driver_id = params[:id].to_i
+      unless driver_id == current_driver.id
+        redirect_to driver_path(current_driver)
+      end
+    elsif transport_company_signed_in?
+      driver_id = params[:id].to_i
+      unless current_transport_company.drivers.find_by(id: driver_id)
+        redirect_to transport_company_path(current_transport_company)
+      end
     end
   end
 

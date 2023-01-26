@@ -1,5 +1,6 @@
 class Public::RoomsController < ApplicationController
   before_action :authenticate_any!
+  before_action :is_matching_login, only: [:show]
 
 
   def create
@@ -44,5 +45,20 @@ class Public::RoomsController < ApplicationController
         authenticate_transport_company!
     end
   end
+
+  def is_matching_login
+    if driver_signed_in?
+      room_id = params[:id].to_i
+      unless current_driver.rooms.find_by(id: room_id)
+        redirect_to driver_path(current_driver)
+      end
+    elsif transport_company_signed_in?
+      room_id = params[:id].to_i
+      unless current_transport_company.rooms.find_by(id: room_id)
+        redirect_to transport_company_path(current_transport_company)
+      end
+    end
+  end
+
 
 end

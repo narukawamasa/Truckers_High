@@ -1,5 +1,6 @@
 class Public::TransportCompaniesController < ApplicationController
   before_action :authenticate_any!
+  before_action :is_matching_login, only: [:edit, :update]
 
   def show
     @transport_company = TransportCompany.find(params[:id])
@@ -60,6 +61,17 @@ class Public::TransportCompaniesController < ApplicationController
         true
     else
         authenticate_transport_company!
+    end
+  end
+
+  def is_matching_login
+    if driver_signed_in?
+      redirect_to driver_path(current_driver)
+    elsif transport_company_signed_in?
+      transport_company_id = params[:id].to_i
+      unless transport_company_id == current_transport_company.id
+        redirect_to transport_company_path(current_transport_company)
+      end
     end
   end
 
