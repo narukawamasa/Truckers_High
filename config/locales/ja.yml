@@ -12,6 +12,31 @@
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    attributes:
+      company:
+        name: "会社名"
+        address: "住所"
+      driver:
+        family_name: "姓"
+        first_name: "名"
+        family_name_kana: "姓(カナ)"
+        first_name_kana: "名(カナ)"
+        phone_number: "電話番号"
+      license:
+        name: "免許名"
+      review:
+        objective: "目的"
+        method: "方法"
+        baggage: "荷物"
+        vehicle: "車両"
+        reception_time: "受付時間"
+        order: "並び方"
+        waiting_place: "待機場所"
+      transport_company:
+        name: "会社名"
+        postal_code: "郵便番号"
+        address: "住所"
+        phone_number: "電話番号"
   date:
     abbr_day_names:
     - 日

@@ -6,8 +6,11 @@ class Public::CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.save
-    redirect_to companies_path
+    if  @company.save
+      redirect_to companies_path
+    else
+      render :new
+    end
   end
 
   def index
@@ -47,11 +50,6 @@ class Public::CompaniesController < ApplicationController
     @bookmark = Bookmark.new
   end
 
-  def edit
-  end
-
-  def update
-  end
 
 
   private

@@ -1,5 +1,5 @@
+<%= render 'layouts/error', model: @driver %>
 <%= form_with model:@driver, url: driver_all_path(@driver.id), local:true, method: :patch do |f| %>
-<div class="container">
   <div class="row mb-5">
     <div class="col-5"></div>
     <div>
@@ -76,10 +76,11 @@
   <div class="row mt-3">
     <div class="col-3"></div>
     <div class="col-2">所持してる免許</div>
-    <div class="col-5">
-      <%= f.fields_for :possession_licenses, @driver.possession_licenses.build, local: true do |l| %>
-        <%= render 'possession_license_fields', f: l %>
-      <% end %>
+    <div id="possession_licenses" class="col-5">
+      <span>＃恐れ入りますが、</br>選択されてないボックスは削除してください。</span>
+      <%#= f.fields_for :possession_licenses, @driver.possession_licenses.build, local: true do |l| %>
+        <%#= render 'possession_license_fields', f: l %>
+      <%# end %>
       <div class='links'>
         <%= link_to_add_association 'ボックス追加', f, :possession_licenses, class:"btn btn-primary btn-sm" %>
       </div>
@@ -92,5 +93,25 @@
       <div><%= f.submit "編集内容を保存", class: 'px-5 btn btn-success' %></div>
     </div>
   </div>
-</div>
 <%end%>
+
+<script>
+  $(function() {
+    $('#possession_licenses').on('cocoon:after-insert', function() {
+      limtFormCheck()
+    });
+    $('#possession_licenses').on('cocoon:after-remove', function() {
+      limtFormCheck()
+    });
+
+    limtFormCheck()
+
+    function limtFormCheck() {
+      if ($('#possession_licenses .nested-fields').length == <%= @licenses.count %>) {
+        $('.add_fields').hide()
+      } else {
+        $('.add_fields').show()
+      }
+    }
+  })
+</script>

@@ -1,7 +1,7 @@
-<div class="container">
+<%= render 'layouts/error', model: @license %>
   <div class="row">
     <h4>免許新規登録</h4>
-    <%= form_with model: @license, url: licenses_path, method: :post, local: false do |f| %>
+    <%= form_with model: @license, url: licenses_path, method: :post do |f| %>
       <%= f.text_field :name %>
       <%= f.submit "新規登録" %>
     <% end %>
@@ -20,4 +20,3 @@
     </table>
     <%= paginate @licenses %>
   </div>
-</div>

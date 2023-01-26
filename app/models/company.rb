@@ -3,6 +3,9 @@ class Company < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
+  validates :name, presence: true
+  validates :address, presence: true
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)

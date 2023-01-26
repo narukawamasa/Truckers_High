@@ -9,6 +9,12 @@ class TransportCompany < ApplicationRecord
   has_many :rooms
   has_many :messages, as: :messageable
 
+  validates :email, presence: true
+  validates :name, presence: true
+  validates :postal_code, presence: true
+  validates :address, presence: true
+  validates :phone_number, presence: true
+
 
   def exsits_uncheck_messages?
     #通知機能の為

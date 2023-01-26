@@ -1,5 +1,5 @@
+<%= render 'layouts/error', model: @company %>
 <%= form_with model: @company, url: companies_path, local:true, method: :post do |f| %>
-<div class="container">
   <div class="row mb-5">
     <div class="col-1">
       <div></div>
@@ -62,5 +62,4 @@
       <div><%= f.submit "新規登録", class: 'px-5 btn btn-success' %></div>
     </div>
   </div>
-</div>
 <%end%>

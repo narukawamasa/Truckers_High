@@ -11,7 +11,14 @@ class Public::DriversController < ApplicationController
 
   def edit
     @driver = Driver.find(params[:id])
-    @licenses = License.all
+    possession_licenses = current_driver.possession_licenses.all
+    if possession_licenses.exists?
+      possession_license_id = possession_licenses.pluck(:license_id)
+      @licenses = License.where.not(id: possession_license_id)
+    else
+      @licenses = License.all
+    end
+
   end
 
   def update
@@ -35,8 +42,18 @@ class Public::DriversController < ApplicationController
 
   def update_all
     @driver = Driver.find(params[:id])
-    @driver.update(driver_params)
-    redirect_to driver_path(@driver.id)
+    if @driver.update(driver_params)
+      redirect_to driver_path(@driver.id)
+    else
+      possession_licenses = current_driver.possession_licenses.all
+      if possession_licenses.exists?
+        possession_license_id = possession_licenses.pluck(:license_id)
+        @licenses = License.where.not(id: possession_license_id)
+      else
+        @licenses = License.all
+      end
+      render :edit
+    end
   end
 
   private

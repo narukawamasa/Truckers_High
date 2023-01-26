@@ -4,13 +4,18 @@ class Public::LicensesController < ApplicationController
     @licenses = License.page(params[:page])
     @license = License.new
     @possession_license = PossessionLicense.new
-    
+
   end
 
   def create
     @license = License.new(license_params)
-    @license.save
-    redirect_to request.referer
+    if @license.save
+      redirect_to request.referer
+    else
+      @licenses = License.page(params[:page])
+      @possession_license = PossessionLicense.new
+      render :index
+    end
   end
 
   private

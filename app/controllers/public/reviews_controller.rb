@@ -9,8 +9,11 @@ class Public::ReviewsController < ApplicationController
     @company = Company.find(params[:company_id])
     @review = current_driver.reviews.new(review_params)
     @review.company_id = @company.id
-    @review.save
-    redirect_to company_reviews_path
+    if @review.save
+      redirect_to company_reviews_path
+    else
+      render :new
+    end
   end
 
   def show
@@ -47,8 +50,11 @@ class Public::ReviewsController < ApplicationController
   def update
     @company = Company.find(params[:company_id])
     @review = Review.find(params[:id])
-    @review.update(review_params)
-    redirect_to company_review_path(@company.id, @review.id)
+    if @review.update(review_params)
+      redirect_to company_review_path(@company.id, @review.id)
+    else
+      render :edit
+    end
   end
 
   def review_params

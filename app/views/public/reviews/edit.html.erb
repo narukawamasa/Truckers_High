@@ -1,6 +1,7 @@
+<%= render 'layouts/error', model: @review %>
 <%= form_with model: [@company, @review] do |f| %>
-<div class="container">
   <div class="row mb-5">
+    <div class="col-4"></div>
     <div class="col-1">
       <div></div>
     </div>
@@ -10,6 +11,7 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :目的 %></div>
     </div>
@@ -26,6 +28,7 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :積み、荷下ろし方法　＃必須 %></div>
     </div>
@@ -35,6 +38,7 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :荷物詳細＃必須 %></div>
     </div>
@@ -44,6 +48,7 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :あなたの車両＃必須 %></div>
     </div>
@@ -53,42 +58,47 @@
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :受付時間、場所＃必須 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-6">
       <div><%= f.text_field :reception_time, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :並び方＃必須 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-6">
       <div><%= f.text_field :order, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :待機場所＃必須 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-6">
       <div><%= f.text_field :waiting_place, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row my-2">
+    <div class="col-4"></div>
     <div class="col-2">
       <div><%= f.label :その他共有事項 %></div>
     </div>
-    <div class="col-10">
+    <div class="col-6">
       <div><%= f.text_field :other, autofocus: true %></div>
     </div>
   </div>
 
   <div class="row mt-3">
+    <div class="col-4"></div>
     <div class="col-2">
       <div></div>
     </div>
@@ -96,5 +106,5 @@
       <div><%= f.submit "編集する", class: 'px-5 btn btn-success' %></div>
     </div>
   </div>
-</div>
+
 <%end%>

@@ -4,4 +4,5 @@ class License < ApplicationRecord
 
   validates :name, presence: true
 
+
 end

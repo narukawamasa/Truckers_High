@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get 'about' => 'homes#about'
-    patch 'drivers/all/:id' => 'drivers#update_all', as: 'driver_all'
+    patch 'drivers/:id' => 'drivers#update_all', as: 'driver_all'
     resources :drivers, only: [:index, :show, :update, :edit]
     resources :transport_companies, only: [:index, :show, :edit, :update]
     resources :licenses, only: [:index, :create]

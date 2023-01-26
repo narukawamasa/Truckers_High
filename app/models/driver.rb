@@ -15,6 +15,14 @@ class Driver < ApplicationRecord
   has_many :rooms
   has_many :messages, as: :messageable
 
+  validates :email, presence: true
+  validates :family_name, presence: true
+  validates :first_name, presence: true
+  validates :family_name_kana, presence: true
+  validates :first_name_kana, presence: true
+  validates :phone_number, presence: true
+
+
 
 
   def exsits_uncheck_messages?

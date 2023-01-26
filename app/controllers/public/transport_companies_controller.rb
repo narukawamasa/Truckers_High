@@ -41,8 +41,11 @@ class Public::TransportCompaniesController < ApplicationController
 
   def update
     @transport_company = TransportCompany.find(params[:id])
-    @transport_company.update(transport_company_params)
-    redirect_to transport_company_path(@transport_company.id)
+    if @transport_company.update(transport_company_params)
+      redirect_to transport_company_path(@transport_company.id)
+    else
+      render :edit
+    end
   end
 
   private

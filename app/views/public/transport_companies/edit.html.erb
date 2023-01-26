@@ -1,5 +1,6 @@
+<%= render 'layouts/error', model: @transport_company %>
 <%= form_with model: @transport_company, url: transport_company_path(@transport_company.id), local:true, method: :patch do |f| %>
-<div class="container">
+
   <div class="row mb-5">
     <div class="col-5"></div>
     <div>
@@ -86,5 +87,5 @@
       <div><%= f.submit "編集内容を保存", class: 'px-5 btn btn-success' %></div>
     </div>
   </div>
-</div>
+
 <%end%>
