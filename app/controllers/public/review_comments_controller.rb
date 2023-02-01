@@ -5,6 +5,9 @@ class Public::ReviewCommentsController < ApplicationController
     @review = Review.find(params[:review_id])
     @review_comment = current_driver.review_comments.new(review_comment_params)
     @review_comment.review_id = @review.id
+    
+    @review_comment.score = Language.get_data(review_comment_params[:comment])
+    
     @review_comment.save
   end
 

@@ -70,6 +70,7 @@
       <% @review_comments.each do |review_comment| %>
         <div>
           <p><%= review_comment.comment %>　<%= review_comment.created_at.strftime("%Y-%m-%d %H:%M:%S") %>　<%= "違反コメント" if review_comment.deletion == true %></p>
+          <p class-"sentiment-score"><%= review_comment.score %></p>
           <% if review_comment.deletion == false %>
           <P>
             <%= form_with model: [@company, @review, review_comment], url: admin_company_review_review_comment_path(@company.id, @review.id, review_comment.id), method: :patch do |f| %>
