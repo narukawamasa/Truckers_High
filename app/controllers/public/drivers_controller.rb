@@ -28,7 +28,7 @@ class Public::DriversController < ApplicationController
     #下記運送会社に所属してない場合に、初めて所属した運送会社とのルームも同時に作成する
     if @driver.transport_company_id == nil
       @driver.update(driver_params)
-      if @driver.rooms.exists?
+      if @driver.rooms.exists?(transport_company_id: @driver.transport_company_id)
         redirect_to request.referer
       else
         @room = Room.new

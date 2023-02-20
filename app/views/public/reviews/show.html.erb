@@ -5,7 +5,7 @@
     </div>
     <div class="col-2">
       <% if @review.driver_id == current_driver.id %>
-        <%= link_to "編集する", edit_company_review_path(@review) %>
+        <%= link_to "編集する", edit_company_review_path(@company,@review) %>
       <% end %>
     </div>
   </div>

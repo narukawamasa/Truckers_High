@@ -49,6 +49,7 @@
             <% end %>
             </td>
           </tr>
+          <% if driver_signed_in? %>
           <tr>
             <td>
               <%= link_to "免許一覧へ", licenses_path %>
@@ -64,12 +65,17 @@
               <%= link_to "情報編集", edit_driver_path(@driver.id) %>
             </td>
           </tr>
+          <% end %>
           <% if @driver.rooms.exists? %>
           <tr>
             <% unless @driver.transport_company_id == nil %>
             <td>
               <% room = Room.find_by(driver_id: @driver.id, transport_company_id: @driver.transport_company.id) %>
-              <%= link_to "所属会社とのDMルームへ", room_path(room.id) %>
+              <% if driver_signed_in? %>
+                <%= link_to "所属会社とのDMルームへ", room_path(room.id) %>
+              <% elsif transport_company_signed_in? %>
+                <%= link_to "DMルームへ", room_path(room.id) %>
+              <% end %>
             </td>
             <% end %>
           </tr>
