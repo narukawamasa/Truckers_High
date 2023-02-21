@@ -20,4 +20,16 @@ class Company < ApplicationRecord
   '〒' + postal_code + ' ' + address
   end
 
+  def negative_comments_count
+    comments_count = 0
+    reviews.each do |review|
+      review.review_comments.each do |comment|
+        if comment.score.to_i < 0
+          comments_count += 1
+        end
+      end
+    end
+    return comments_count
+  end
+
 end
