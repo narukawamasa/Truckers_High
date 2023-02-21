@@ -3,7 +3,9 @@
       <%= link_to "履歴一覧へ", contacts_path %>
     </div>
     <div class="col-2">
+      <% if @contact.status != "fixed" %>
         <%= link_to "編集する", edit_contact_path(@contact.id) %>
+      <% end %>
     </div>
   </div>
   <div class="row">

@@ -48,6 +48,9 @@ Rails.application.routes.draw do
         resources :review_comments, only: [:update]
       end
     end
+    get 'contacts/index_ok' => 'contacts#index_ok', as: 'contacts_ok'
+    resources :contacts, only: [:index, :update, :show]
+
   end
 
 

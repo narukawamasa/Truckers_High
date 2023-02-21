@@ -95,9 +95,9 @@ class Public::ContactsController < ApplicationController
 
   def index
     if driver_signed_in?
-      @contacts = Contact.where(contactable_type: "driver", contact_company_id: current_driver.id).page(params[:page])
+      @contacts = Contact.where(contactable_type: "driver", contactable_id: current_driver.id).page(params[:page])
     elsif transport_company_signed_in?
-      @contacts = Contact.where(contactable_type: "transport_company", contact_company_id: current_transport_company.id).page(params[:page])
+      @contacts = Contact.where(contactable_type: "transport_company", contactable_id: current_transport_company.id).page(params[:page])
     else
       redirect_to root_path
     end
