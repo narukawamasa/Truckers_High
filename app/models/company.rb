@@ -24,8 +24,10 @@ class Company < ApplicationRecord
     comments_count = 0
     reviews.each do |review|
       review.review_comments.each do |comment|
-        if comment.score.to_i < 0
-          comments_count += 1
+        if comment.score != nil
+          if comment.score <= -0.1 && comment.deletion == false
+            comments_count += 1
+          end
         end
       end
     end
