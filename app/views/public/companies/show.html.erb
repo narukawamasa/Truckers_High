@@ -37,6 +37,14 @@
             </td>
             <td><%= link_to "レビューを書く", new_company_review_path(@company), class:"btn btn-info btn-sm" %></td>
           </tr>
+          <tr>
+            <td>
+              <%= form_with model: Contact.new, url: new_contact_path, method: :get do |f| %>
+                <%= f.hidden_field :contact_company_id, :value => @company.id %>
+                <%= f.submit "編集/削除依頼", class:"btn btn-success btn-sm " %>
+              <% end %>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

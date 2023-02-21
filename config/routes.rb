@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :rooms, only: [:create, :show, :index] do
       resources :messages, only: [:create]
     end
+    resources :contacts, only: [:new, :create, :index, :edit, :update]
   end
 
   namespace :admin do

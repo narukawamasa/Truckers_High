@@ -1,0 +1,58 @@
+<%= form_with model: @contact do |f| %>
+  <div class="row mb-5">
+    <div class="col-4"></div>
+    <div class="col-1">
+      <div></div>
+    </div>
+    <div>
+      <h5 style="background-color:#f4f4f4">　お問い合わせ　</h5>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div><%= f.label :カテゴリー %></div>
+    </div>
+    <div class="col-4">
+      <div>
+        <%= f.radio_button :category, Contact.categories.key(0), autofocus: true %>
+        <%= f.label :category_edit, Contact.categories_i18n[:edit] %>
+        <%= f.radio_button :category, Contact.categories.key(1), autofocus: true %>
+        <%= f.label :category_deletion, Contact.categories_i18n[:deletion] %>
+        <%= f.radio_button :category, Contact.categories.key(2), autofocus: true %>
+        <%= f.label :category_other, Contact.categories_i18n[:other] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div><%= f.label :お問い合わせ内容　＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_area :text, autofocus: true, size: "50x15" %></div>
+    </div>
+  </div>
+  <% if driver_signed_in? %>
+    <%= f.hidden_field :contactable_id, :value => current_driver.id %>
+    <%= f.hidden_field :contactable_type, :value => "driver" %>
+  <% elsif transport_company_signed_in? %>
+    <%= f.hidden_field :contactable_id, :value => current_transport_company.id %>
+    <%= f.hidden_field :contactable_type, :value => "transport_company" %>
+  <% end %>
+  <% if @company.present? %>
+    <%= f.hidden_field :contact_company_id, :value => @company.id %>
+  <% end %>
+  <div class="row mt-3">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div></div>
+    </div>
+    <div class="col-4">
+      <div><%= f.submit "お問い合わせを送る", class: 'px-5 btn btn-success' %></div>
+    </div>
+  </div>
+
+<%end%>
