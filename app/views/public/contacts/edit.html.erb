@@ -1,0 +1,49 @@
+<%= render 'layouts/error', model: @contact %>
+<%= form_with model: @contact, url: contact_path(@contact.id), method: :patch do |f| %>
+  <div class="row mb-5">
+    <div class="col-4"></div>
+    <div class="col-1">
+      <div></div>
+    </div>
+    <div>
+      <h5 style="background-color:#f4f4f4">　お問い合わせ編集　</h5>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div><%= f.label :カテゴリー %></div>
+    </div>
+    <div class="col-4">
+      <div>
+        <%= f.radio_button :category, Contact.categories.key(0), autofocus: true %>
+        <%= f.label :category_edit, Contact.categories_i18n[:edit] %>
+        <%= f.radio_button :category, Contact.categories.key(1), autofocus: true %>
+        <%= f.label :category_deletion, Contact.categories_i18n[:deletion] %>
+        <%= f.radio_button :category, Contact.categories.key(2), autofocus: true %>
+        <%= f.label :category_other, Contact.categories_i18n[:other] %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div><%= f.label :お問い合わせ内容　＃必須 %></div>
+    </div>
+    <div class="col-2">
+      <div><%= f.text_area :text, autofocus: true, size: "50x15" %></div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-4"></div>
+    <div class="col-2">
+      <div></div>
+    </div>
+    <div class="col-4">
+      <div><%= f.submit "変更を保存", class: 'px-5 btn btn-success' %></div>
+    </div>
+  </div>
+
+<%end%>

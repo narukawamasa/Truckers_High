@@ -80,6 +80,13 @@
             <% end %>
           </tr>
           <% end %>
+          <% if driver_signed_in? %>
+            <tr>
+              <td>
+                <%= link_to "お問い合わせ履歴", contacts_path %>
+              </td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
