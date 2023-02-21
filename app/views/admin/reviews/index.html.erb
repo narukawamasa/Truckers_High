@@ -9,6 +9,7 @@
     <tr>
       <th scope="col">目的</th>
       <th scope="col">投稿日時</th>
+      <th scope="col">ネガティブコメント</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
         <% if review.deletion == true %>
         <td>違反レビュー</td>
         <% end %>
+        <td>ネガティブ数：<%= review.negative_comments_count %></td>
       </tr>
     <% end %>
   </tbody>
