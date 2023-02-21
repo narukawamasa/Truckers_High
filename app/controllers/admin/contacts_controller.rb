@@ -3,6 +3,9 @@ class Admin::ContactsController < ApplicationController
 
   def show
     @contact = Contact.find(params[:id])
+    unless @contact.contact_company_id == nil
+      @company = Company.find_by(id: @contact.contact_company_id)
+    end
   end
 
   def index

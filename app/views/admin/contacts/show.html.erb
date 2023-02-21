@@ -15,6 +15,12 @@
           </tr>
         </thead>
         <tbody>
+          <% unless @contact.contact_company_id == nil %>
+          <tr>
+            <th scope="row">会社リンク</th>
+            <td><%= link_to "#{@company.name}", admin_company_path(@company.id) %></td>
+          </tr>
+          <% end %>
           <tr>
             <th scope="row">カテゴリー</th>
             <td><%= @contact.category_i18n %></td>
