@@ -21,7 +21,6 @@ class Public::ContactsController < ApplicationController
 
     @contact = Contact.new(contact_params)
     if @contact.contact_company_id.present?
-      byebug
       @company = Company.find_by(id: @contact.contact_company_id)
     end
     if @contact.save
