@@ -24,9 +24,25 @@ class Public::TransportCompany::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  before_action :transport_company_state, only: [:create]
 
   def after_sign_in_path_for(resource)
     transport_company_path(current_transport_company)
   end
+
+  protected
+
+
+  def transport_company_state
+    @transport_company = TransportCompany.find_by(email: params[:transport_company][:email])
+    return if !@transport_company
+
+    if @transport_company.valid_password?(params[:transport_company][:password]) && !@transport_company.is_deleted
+    else
+      redirect_to "/transport_companies/sign_up"
+    end
+
+  end
+
 
 end

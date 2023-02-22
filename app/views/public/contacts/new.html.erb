@@ -33,7 +33,7 @@
       <div><%= f.label :お問い合わせ内容　＃必須 %></div>
     </div>
     <div class="col-2">
-      <div><%= f.text_area :text, autofocus: true, size: "50x15" %></div>
+      <div><%= f.text_area :text, autofocus: true, size: "50x15", value: params[:text] %></div>
     </div>
   </div>
   <% if driver_signed_in? %>
@@ -42,6 +42,9 @@
   <% elsif transport_company_signed_in? %>
     <%= f.hidden_field :contactable_id, :value => current_transport_company.id %>
     <%= f.hidden_field :contactable_type, :value => "transport_company" %>
+  <% else %>
+    <%= f.hidden_field :contactable_id, :value => 0 %>
+    <%= f.hidden_field :contactable_type, :value => "no_user" %>
   <% end %>
   <% if @company.present? %>
     <%= f.hidden_field :contact_company_id, :value => @company.id %>

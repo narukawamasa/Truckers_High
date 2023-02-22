@@ -3,7 +3,7 @@ class Public::ContactsController < ApplicationController
 
   def new
     unless driver_signed_in? || transport_company_signed_in?
-      redirect_to root_path
+      @contact = Contact.new
     end
 
     @contact = Contact.new
@@ -16,7 +16,12 @@ class Public::ContactsController < ApplicationController
 
   def create
     unless driver_signed_in? || transport_company_signed_in?
-      redirect_to root_path
+      @contact = Contact.new(contact_params)
+      if @contact.save
+        redirect_to root_path
+      else
+        render :new
+      end
     end
 
     @contact = Contact.new(contact_params)
@@ -101,6 +106,10 @@ class Public::ContactsController < ApplicationController
       redirect_to root_path
     end
     @number = 0
+  end
+
+  def new_with_text
+    redirect_to new_contact_path(text: params[:text])
   end
 
   private

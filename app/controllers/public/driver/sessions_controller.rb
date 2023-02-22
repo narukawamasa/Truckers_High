@@ -25,8 +25,25 @@ class Public::Driver::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  before_action :driver_state, only: [:create]
+
   def after_sign_in_path_for(resource)
     driver_path(current_driver)
+  end
+
+
+  protected
+
+
+  def driver_state
+    @driver = Driver.find_by(email: params[:driver][:email])
+    return if !@driver
+
+    if @driver.valid_password?(params[:driver][:password]) && !@driver.is_deleted
+    else
+      redirect_to "/drivers/sign_up"
+    end
+
   end
 
 end

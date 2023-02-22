@@ -12,19 +12,19 @@
     <% @contacts.each do |contact| %>
     <tr>
       <th scope="row"><%= @number %></th>
-      <% if contact.created_at == contact.updated_at %>
-        <td>
-          <%= link_to contact_path(contact.id) do %>
-            <%= contact.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
-          <% end %>
-        </td>
-      <% else %>
-        <td>
-          <%= link_to contact_path(contact.id) do %>
-            <%= contact.created_at.strftime("%Y-%m-%d %H:%M:%S") %> ( <%= contact.updated_at.strftime("%Y-%m-%d %H:%M:%S") %> )
-          <% end %>
-        </td>
-      <% end %>
+        <% if contact.created_at == contact.updated_at %>
+          <td>
+            <%= link_to contact_path(contact.id) do %>
+              <%= contact.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+            <% end %>
+          </td>
+        <% else %>
+          <td>
+            <%= link_to contact_path(contact.id) do %>
+              <%= contact.created_at.strftime("%Y-%m-%d %H:%M:%S") %> ( <%= contact.updated_at.strftime("%Y-%m-%d %H:%M:%S") %> )
+            <% end %>
+          </td>
+        <% end %>
       <td><%= contact.category_i18n %></td>
       <td><%= contact.status_i18n %></td>
       <td><%= contact.admin_comment %></td>

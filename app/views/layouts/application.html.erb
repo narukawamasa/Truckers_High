@@ -98,6 +98,11 @@
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"nav-link text-secondary" %>
               </li>
               <% end %>
+              <% unless admin_signed_in? || driver_signed_in? || transport_company_signed_in? %>
+              <li class="nav-item mx-3 text-muted">
+                <%= link_to "お問い合わせ", contact_with_text_path(text: "＃退会して、復帰を希望される方は名前もしくは会社名を記入の上、理由をお送りください") %>
+              </li>
+              <% end %>
             </ul>
           </div>
 

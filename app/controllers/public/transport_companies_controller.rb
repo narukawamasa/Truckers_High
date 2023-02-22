@@ -4,6 +4,7 @@ class Public::TransportCompaniesController < ApplicationController
 
   def show
     @transport_company = TransportCompany.find(params[:id])
+    @contact = Contact.new
     if driver_signed_in?
       @driver = Driver.find(current_driver.id)
     end

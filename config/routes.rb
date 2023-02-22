@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :rooms, only: [:create, :show, :index] do
       resources :messages, only: [:create]
     end
+    get 'contacts/contact_with_text' => 'contacts#new_with_text', as: 'contact_with_text'
     resources :contacts, only: [:new, :create, :index, :edit, :update, :show]
   end
 

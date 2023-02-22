@@ -15,6 +15,28 @@
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <th scope="row">投稿者</th>
+            <% if @contact.contactable_type == "driver" %>
+            <td>
+              運転手：
+              <%= link_to admin_driver_path(@contact.contactable_id) do %>
+                <%= Driver.find(@contact.contactable_id).name %>
+              <% end %>
+            </td>
+            <% elsif @contact.contactable_type == "transport_company" %>
+            <td>
+              運送会社：
+              <%= link_to admin_transport_company_path(@contact.contactable_id) do %>
+                <%= TransportCompany.find(@contact.contactable_id).name %>
+              <% end %>
+            </td>
+            <% else %>
+            <td>
+              未ログイン者
+            </td>
+            <% end %>
+          </tr>
           <% unless @contact.contact_company_id == nil %>
           <tr>
             <th scope="row">会社リンク</th>
