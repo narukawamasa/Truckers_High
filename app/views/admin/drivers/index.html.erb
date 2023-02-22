@@ -6,6 +6,7 @@
       <th scope="col">名前</th>
       <th scope="col">電話番号</th>
       <th scope="col">所属会社</th>
+      <th scope="col">退会有無</th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,11 @@
           <%= link_to admin_transport_company_path(driver.transport_company.id) do %>
             <%= driver.transport_company.name %>
           <% end %>
+        </td>
+      <% end %>
+      <% if driver.is_deleted == true %>
+        <td>
+          退会
         </td>
       <% end %>
     </tr>

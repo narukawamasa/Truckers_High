@@ -7,6 +7,7 @@
       <th scope="col">郵便番号</th>
       <th scope="col">住所</th>
       <th scope="col">電話番号</th>
+      <th scope="col">退会有無</th>
     </tr>
   </thead>
   <tbody>
@@ -21,6 +22,11 @@
       <td><%= transport_company.postal_code %></td>
       <td><%= transport_company.address %></td>
       <td><%= transport_company.phone_number %></td>
+    <% if transport_company.is_deleted == true %>
+      <td>
+        退会
+      </td>
+    <% end %>
     </tr>
     <% @number += 1 %>
     <% end %>

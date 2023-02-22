@@ -4,10 +4,13 @@ class Public::DriversController < ApplicationController
 
   def show
     @driver = Driver.find(params[:id])
+    if @driver.is_deleted == true
+      redirect_to root_path
+    end
   end
 
   def index
-    @drivers = Driver.where(transport_company_id: current_transport_company.id).page(params[:page])
+    @drivers = Driver.where(transport_company_id: current_transport_company.id, is_deleted: false).page(params[:page])
     @number = 1
   end
 
@@ -61,7 +64,7 @@ class Public::DriversController < ApplicationController
   private
 
   def driver_params
-    params.require(:driver).permit(:transport_company_id, :family_name, :first_name, :family_name_kana, :first_name_kana, :introduction, :phone_number, :email, :profile_image, possession_licenses_attributes: [:license_id, :_destroy])
+    params.require(:driver).permit(:transport_company_id, :is_deleted, :family_name, :first_name, :family_name_kana, :first_name_kana, :introduction, :phone_number, :email, :profile_image, possession_licenses_attributes: [:license_id, :_destroy])
   end
 
   def authenticate_any!

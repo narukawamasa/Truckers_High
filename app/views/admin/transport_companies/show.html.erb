@@ -28,6 +28,24 @@
             <th scope="row">会社紹介</th>
             <td><%= @transport_company.introduction %></td>
           </tr>
+          <tr>
+            <th scope="row">退会処理</th>
+            <% if @transport_company.is_deleted == false %>
+            <td>
+              <%= form_with model: @transport_company, url: admin_transport_company_path(@transport_company.id), method: :patch, data: { confirm: '本当に退会させますか？' } do |f| %>
+                <%= f.hidden_field :is_deleted, :value => true %>
+                <%= f.submit "退会する", class:"btn btn-danger" %>
+              <% end %>
+            </td>
+            <% elsif @transport_company.is_deleted == true %>
+            <td>
+              <%= form_with model: @transport_company, url: admin_transport_company_path(@transport_company.id), method: :patch, data: { confirm: '本当に復帰させますか？' } do |f| %>
+                <%= f.hidden_field :is_deleted, :value => false %>
+                <%= f.submit "復帰する", class:"btn btn-danger" %>
+              <% end %>
+            </td>
+            <% end %>
+          </tr>
         </tbody>
       </table>
       <%= link_to "元のページへ", admin_transport_companies_path %>

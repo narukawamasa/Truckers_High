@@ -48,7 +48,10 @@ class Public::CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
+    @company = Company.find_by(id: params[:id])
+    if @company.nil?
+      redirect_to root_path
+    end
     @bookmark = Bookmark.new
   end
 

@@ -4,6 +4,9 @@ class Public::TransportCompaniesController < ApplicationController
 
   def show
     @transport_company = TransportCompany.find(params[:id])
+    if @transport_company.is_deleted == true
+      redirect_to root_path
+    end
     @contact = Contact.new
     if driver_signed_in?
       @driver = Driver.find(current_driver.id)
@@ -13,25 +16,25 @@ class Public::TransportCompaniesController < ApplicationController
   def index
     @number = 1
     if params[:word] == nil || params[:word] == ""
-      @transport_companies = TransportCompany.page(params[:page])
+      @transport_companies = TransportCompany.where(is_deleted: false).page(params[:page])
     else
       word = params[:word]
       search = params[:search]
       range = params[:range]
       if search == "partial_match"
         if range == "name"
-          @transport_companies = TransportCompany.where("name LIKE?","%#{word}%").page(params[:page])
+          @transport_companies = TransportCompany.where("name LIKE?","%#{word}%").where(is_deleted: false).page(params[:page])
           @word = word
         elsif range == "adress"
-          @transport_companies = TransportCompany.where("address LIKE?","%#{word}%").page(params[:page])
+          @transport_companies = TransportCompany.where("address LIKE?","%#{word}%").where(is_deleted: false).page(params[:page])
           @word = word
         end
       else
-        @transport_companies = TransportCompany.page(params[:page])
+        @transport_companies = TransportCompany.where(is_deleted: false).page(params[:page])
       end
 
       unless @transport_companies.exists?
-        @transport_companies = TransportCompany.page(params[:page])
+        @transport_companies = TransportCompany.where(is_deleted: false).page(params[:page])
         @word_error = word
       end
 

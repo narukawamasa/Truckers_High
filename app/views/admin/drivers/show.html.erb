@@ -43,6 +43,25 @@
             <% end %>
             </td>
           </tr>
+          <tr>
+            <th scope="row">退会処理</th>
+            <% if @driver.is_deleted == false %>
+            <td>
+              <%= form_with model: @driver, url: admin_driver_path(@driver.id), method: :patch, data: { confirm: '本当に退会させますか？' } do |f| %>
+                <%= f.hidden_field :is_deleted, :value => true %>
+                <%= f.hidden_field :transport_company_id, :value => nil %>
+                <%= f.submit "退会する", class:"btn btn-danger" %>
+              <% end %>
+            </td>
+            <% elsif @driver.is_deleted == true %>
+            <td>
+              <%= form_with model: @driver, url: admin_driver_path(@driver.id), method: :patch, data: { confirm: '本当に復帰させますか？' } do |f| %>
+                <%= f.hidden_field :is_deleted, :value => false %>
+                <%= f.submit "復帰する", class:"btn btn-danger" %>
+              <% end %>
+            </td>
+            <% end %>
+          </tr>
         </tbody>
       </table>
       <%= link_to "元のページへ", admin_drivers_path %>

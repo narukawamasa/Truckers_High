@@ -19,14 +19,23 @@ class Public::ReviewsController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:company_id])
-    @review = Review.find(params[:id])
+    @company = Company.find_by(id: params[:company_id])
+    if @company.nil?
+      redirect_to root_path
+    end
+    @review = Review.find_by(id: params[:id])
+    if @review.nil?
+      redirect_to root_path
+    end
     @review_comments = ReviewComment.where(review_id: @review.id)
     @review_comment = ReviewComment.new
   end
 
   def index
-    company = Company.find(params[:company_id])
+    company = Company.find_by(id: params[:company_id])
+    if company.nil?
+      redirect_to root_path
+    end
     search = params[:search]
     if params[:search] == nil || params[:search] == ""
       @reviews = Review.where(company_id: company.id).page(params[:page])
